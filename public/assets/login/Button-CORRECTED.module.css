@@ -1,0 +1,153 @@
+.button {
+  width: 100%;
+  height: clamp(2.75rem, 9vw, 3.75rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: clamp(0.5rem, 2vw, 0.75rem);
+  font-family: 'Afacad', sans-serif;
+  font-weight: 700;
+  font-size: clamp(0.875rem, 3.5vw, 1.25rem);
+  line-height: 1.4;
+  letter-spacing: -0.3px;
+  cursor: pointer;
+  transition: all 200ms ease;
+  border: none;
+  position: relative;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   PRIMARY VARIANT (Purple gradient - matches design system)
+   ════════════════════════════════════════════════════════════════ */
+
+.primary {
+  background: linear-gradient(135deg, #9575cd 0%, #7e57c2 100%);
+  color: #ffffff;
+  border: none;
+}
+
+.primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #7e57c2 0%, #6a4ba8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(149, 117, 205, 0.4);
+}
+
+.primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(149, 117, 205, 0.3);
+}
+
+.primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SECONDARY VARIANT (Light with border)
+   ════════════════════════════════════════════════════════════════ */
+
+.secondary {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+}
+
+.secondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.secondary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.secondary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   AUTO WIDTH VARIANT
+   ════════════════════════════════════════════════════════════════ */
+
+.buttonAuto {
+  width: auto;
+  padding: 0 clamp(1.5rem, 4vw, 2rem);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   LOADING STATE
+   ════════════════════════════════════════════════════════════════ */
+
+.loadingText {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.loadingText::after {
+  content: '';
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 600ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   FOCUS STYLES (Accessibility)
+   ════════════════════════════════════════════════════════════════ */
+
+.button:focus-visible {
+  outline: 3px solid #9575cd;
+  outline-offset: 2px;
+}
+
+.secondary:focus-visible {
+  outline-color: rgba(0, 0, 0, 0.5);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   RESPONSIVE BREAKPOINTS
+   ════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 375px) {
+  .button {
+    height: 2.75rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .button {
+    height: 2.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ACCESSIBILITY
+   ════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .button,
+  .loadingText::after {
+    transition: none !important;
+    animation: none !important;
+  }
+  
+  .button:hover:not(:disabled) {
+    transform: none;
+  }
+}

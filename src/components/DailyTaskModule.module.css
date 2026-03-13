@@ -1,0 +1,237 @@
+/* DailyTaskModule.module.css - Refactored to match Figma */
+
+.dailyTaskModule {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 clamp(1rem, 4vw, 1.5rem);
+  margin-bottom: clamp(1.25rem, 3.5vw, 1.5rem); /* Add bottom margin to compensate for category icon extending above */
+}
+
+.card {
+  width: 100%;
+  max-width: 19.625rem; /* 314px - matching JournalModule and DailyQuoteModule */
+  aspect-ratio: 314 / 144; /* Same aspect ratio as other cards */
+  border-radius: 1.5rem; /* 24px */
+  position: relative;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: visible; /* Allow icon to extend above card */
+}
+
+
+
+/* Background layer with image */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/landing-2/cardbackground.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 1.5rem;
+  z-index: 0;
+}
+
+/* Glassmorphism overlay */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 1.5rem;
+  z-index: 1;
+}
+
+/* Content wrapper - above background layers */
+.cardContent {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  padding: clamp(0.75rem, 3vw, 1rem);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Blob at top-left corner - opposite shape of dateBlob */
+.blob {
+  position: absolute;
+  top: 0.25rem;
+  left: 0.25rem;
+  /* Dimensions */
+  width: clamp(40px, 10vw, 52px);
+  aspect-ratio: 52 / 43;
+  /* Asymmetric pill shape - OPPOSITE of dateBlob */
+  /* Top-left | Top-right | Bottom-right | Bottom-left */
+  border-radius: 12px 21.5px 21.5px 12px;
+  background: linear-gradient(135deg, #ced4ff 0%, #c1c8ff 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  /* Fallback */
+  background: rgba(206, 212, 255, 0.85);
+  border: none;
+}
+
+/* Category icon at top center - positioned above card */
+.categoryIconWrapper {
+  position: absolute;
+  top: clamp(-1.25rem, -3.5vw, -1.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(2.5rem, 8vw, 3rem);
+  height: clamp(2.5rem, 8vw, 3rem);
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffd89b 0%, #ffb347 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 2px solid white;
+  z-index: 10;
+}
+
+.categoryIcon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Category name */
+.categoryName {
+  font-family: 'Afacad', sans-serif;
+  font-size: clamp(0.75rem, 3vw, 0.875rem);
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  margin: 0;
+  padding-top: 0.5rem;
+  letter-spacing: 0.02em;
+}
+
+/* Content area */
+.content {
+  display: flex;
+  flex-direction: row;
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+  flex: 1;
+  align-items: flex-start;
+}
+
+/* Text section on left */
+.textSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: space-between;
+  min-height: clamp(3rem, 12vw, 4rem);
+}
+
+.taskPrompt {
+  font-family: 'Afacad', sans-serif;
+  font-size: clamp(0.625rem, 2.5vw, 0.75rem);
+  font-weight: 500;
+  color: #ffffff !important;
+  line-height: 1.4;
+  margin: 0;
+  padding: 0;
+}
+
+/* Input line */
+.inputLine {
+  width: 100%;
+  height: 1.5px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 1px;
+  margin-top: auto;
+}
+
+/* Illustration section on right */
+.illustrationSection {
+  flex: 0 0 clamp(3.5rem, 15vw, 4.5rem);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding-top: 0;
+}
+
+.illustration {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  max-height: clamp(4rem, 18vw, 5rem);
+}
+
+/* Arrow button - just yellow arrow, no circle */
+.arrowButton {
+  position: absolute;
+  bottom: 5%; /* Percentage relative to card height */
+  right: 5%; /* Percentage relative to card width */
+  width: auto;
+  height: auto;
+  background: transparent;
+  border: none;
+  color: #FFA726;
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: all 200ms ease;
+}
+
+.arrowButton:hover {
+  transform: translateX(2px);
+  color: #FF9800;
+}
+
+.arrowButton:active {
+  transform: translateX(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 375px) {
+  .dailyTaskModule {
+    padding: 0 1rem;
+    margin-top: 1.5rem;
+  }
+  
+  .card {
+    padding: 1.5rem 1.25rem;
+  }
+  
+  .content {
+    gap: 0.75rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .card {
+    padding: 1.25rem 1rem;
+  }
+  
+  .taskPrompt {
+    font-size: 0.75rem;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .arrowButton {
+    transition: none !important;
+  }
+  
+  .arrowButton:hover {
+    transform: none;
+  }
+}
+
+.arrowButton:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 2px;
+}
+

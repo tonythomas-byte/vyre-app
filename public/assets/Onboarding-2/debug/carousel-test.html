@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #f5f0ef; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; gap: 1rem; }
+
+.moodSelectorContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1rem);
+  padding: clamp(1rem, 3vw, 2rem) 0;
+  position: relative;
+}
+
+/* 
+  WRAPPER: full width, perspective here 
+  Items translate within the full wrapper width — no distortion
+*/
+.carouselWrapper {
+  width: 100%;
+  height: clamp(160px, 52vw, 280px);
+  position: relative;
+  cursor: grab;
+  perspective: 800px;
+  perspective-origin: 50% 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+/* 
+  STAGE: full width of wrapper, preserve-3d
+  Items are absolute, centered via left:50% + translateX offset
+  This way translateX stays within the flat horizontal plane
+*/
+.carouselStage {
+  position: relative;
+  width: 100%;
+  height: clamp(80px, 26vw, 140px);
+  transform-style: preserve-3d;
+}
+
+/*
+  ITEM: centered horizontally using left: 50%
+  Then translateX moves left/right from that center
+  Fixed width/height — does NOT inherit wrapper size
+*/
+.carouselItem {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(80px, 26vw, 140px);
+  height: clamp(80px, 26vw, 140px);
+  margin-top: calc(clamp(80px, 26vw, 140px) / -2);
+  margin-left: calc(clamp(80px, 26vw, 140px) / -2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  transform-origin: center center;
+  cursor: pointer;
+  transition: scale 300ms ease-out, opacity 300ms ease-out;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: bold;
+  color: white;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+.shadowCircle {
+  width: clamp(80px, 26vw, 140px);
+  height: clamp(16px, 5vw, 28px);
+  background: radial-gradient(ellipse 100% 100% at 50% 50%, rgba(160,160,160,0.55) 0%, transparent 100%);
+  border-radius: 50%;
+  filter: blur(6px);
+}
+
+.floralWrapper {
+  width: 100%;
+  height: clamp(64px, 20vw, 104px);
+  position: relative;
+  perspective: 600px;
+  perspective-origin: 50% 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.floralStage {
+  position: relative;
+  width: 100%;
+  height: clamp(32px, 10vw, 52px);
+  transform-style: preserve-3d;
+}
+
+.floralItem {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(32px, 10vw, 52px);
+  height: clamp(32px, 10vw, 52px);
+  margin-top: calc(clamp(32px, 10vw, 52px) / -2);
+  margin-left: calc(clamp(32px, 10vw, 52px) / -2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  transform-origin: center center;
+  transition: scale 300ms ease-out, opacity 300ms ease-out;
+}
+
+.floralDot {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.controls { display: flex; gap: 1rem; }
+button {
+  padding: 0.5rem 1.5rem;
+  border: none; border-radius: 2rem;
+  background: #333; color: white;
+  cursor: pointer; font-size: 0.9rem;
+}
+.info { font-size: 0.8rem; color: #666; text-align: center; }
+</style>
+</head>
+<body>
+
+<div class="moodSelectorContainer">
+  <div class="carouselWrapper" id="wrapper">
+    <div class="carouselStage" id="stage">
+      <div class="carouselItem" id="item0"><div class="card" style="background:#e84393">😢</div></div>
+      <div class="carouselItem" id="item1"><div class="card" style="background:#ff6b35">😊</div></div>
+      <div class="carouselItem" id="item2"><div class="card" style="background:#ffd600;color:#333">😭</div></div>
+      <div class="carouselItem" id="item3"><div class="card" style="background:#00c896">😕</div></div>
+      <div class="carouselItem" id="item4"><div class="card" style="background:#7c4dff">😡</div></div>
+    </div>
+  </div>
+
+  <div class="shadowCircle"></div>
+
+  <div class="floralWrapper">
+    <div class="floralStage" id="floralStage">
+      <div class="floralItem" id="f0"><div class="floralDot" style="background:#e84393;opacity:0.7">🌸</div></div>
+      <div class="floralItem" id="f1"><div class="floralDot" style="background:#ff6b35;opacity:0.7">🌸</div></div>
+      <div class="floralItem" id="f2"><div class="floralDot" style="background:#ffd600;opacity:0.7">🌸</div></div>
+      <div class="floralItem" id="f3"><div class="floralDot" style="background:#00c896;opacity:0.7">🌸</div></div>
+      <div class="floralItem" id="f4"><div class="floralDot" style="background:#7c4dff;opacity:0.7">🌸</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <button onclick="rotate(-1)">← Prev</button>
+  <button onclick="rotate(1)">Next →</button>
+</div>
+<div class="info" id="info">Centered: Happy (index 1)</div>
+
+<script>
+const AVATAR_STEP = 160
+const FLORAL_STEP = 60
+const SIDE_Z      = -150
+const TOTAL       = 5
+
+let centered = 1  // Happy on load
+
+function update(animating) {
+  for (let i = 0; i < TOTAL; i++) {
+    const item   = document.getElementById('item' + i)
+    const floral = document.getElementById('f' + i)
+    const offset = i - centered
+
+    const ax = offset * AVATAR_STEP
+    const fx = offset * FLORAL_STEP
+    const z  = offset === 0 ? 0 : SIDE_Z
+    const sc = offset === 0 ? 1 : Math.abs(offset) === 1 ? 0.6 : 0
+    const op = offset === 0 ? 1 : Math.abs(offset) === 1 ? 0.8 : 0
+    const vis = Math.abs(offset) <= 1 ? 'visible' : 'hidden'
+    const tr  = animating ? 'transform 300ms ease-out, scale 300ms ease-out, opacity 300ms ease-out' : 'scale 200ms ease-out, opacity 200ms ease-out'
+
+    item.style.transform   = `translateX(${ax}px) translateZ(${z}px)`
+    item.style.scale       = sc
+    item.style.opacity     = op
+    item.style.visibility  = vis
+    item.style.transition  = tr
+
+    floral.style.transform  = `translateX(${fx}px) translateZ(${z}px)`
+    floral.style.scale      = sc
+    floral.style.opacity    = op * 0.9
+    floral.style.visibility = vis
+    floral.style.transition = tr
+  }
+  document.getElementById('info').textContent = `Centered: index ${centered}`
+}
+
+function rotate(dir) {
+  centered = Math.max(0, Math.min(TOTAL - 1, centered + dir))
+  update(true)
+}
+
+update(false)
+</script>
+</body>
+</html>

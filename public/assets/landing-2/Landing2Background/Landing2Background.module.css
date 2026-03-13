@@ -1,0 +1,17 @@
+/* Override only the background gradient for landing-2 page */
+.landing2Wrapper :global(.backgroundContainer) {
+  background: linear-gradient(180deg, 
+    hsl(44, 100%, 93%) 0%,     /* Top - cream/beige */
+    hsl(47, 100%, 90%) 25%,    /* Upper middle */
+    hsl(47, 100%, 96%) 50%,    /* Center - lightest */
+    hsl(207, 100%, 77%) 100%   /* Bottom - light blue */
+  ) !important;
+}
+
+/* Ensure all other PageBackground properties remain unchanged */
+.landing2Wrapper :global(.glassmorphismOverlay),
+.landing2Wrapper :global(.flowerCarpetLeft),
+.landing2Wrapper :global(.flowerCarpetRight),
+.landing2Wrapper :global(.contentWrapper) {
+  /* Inherit all styles from PageBackground - no overrides */
+}

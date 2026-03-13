@@ -1,0 +1,184 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  position: relative;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   COLLAPSED STATE
+   ════════════════════════════════════════════════════════════════ */
+
+.inputCollapsed {
+  width: 100%;
+  padding: clamp(0.75rem, 3vw, 1rem) clamp(1rem, 4vw, 1.5rem);
+  background: linear-gradient(180deg, #D4B6FF 0%, #F9F0FB 100%);
+  border: 1px solid #FFFFFF;
+  border-radius: 6px;
+  font-size: clamp(1rem, 4vw, 1.25rem);
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  transition: all 200ms ease;
+  outline: none;
+  font-family: inherit;
+}
+
+.inputCollapsed:hover {
+  opacity: 0.9;
+}
+
+.inputCollapsed:focus {
+  opacity: 0.95;
+}
+
+.inputCollapsed::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: 300;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   EXPANDED STATE
+   ════════════════════════════════════════════════════════════════ */
+
+.wheelExpanded {
+  width: 100%;
+  position: absolute;  /* overlay positioning */
+  top: 0;
+  left: 0;
+  right: 0;
+  /* Height calculated dynamically to reach divider */
+  height: calc(100vh - var(--wheel-top-offset, 200px));
+  max-height: 70vh;  /* safety limit */
+  overflow: hidden;
+  border-radius: clamp(0.75rem, 3vw, 1rem);
+  z-index: 10;
+
+  background: rgba(235, 225, 248, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 2px solid #9575cd;
+  box-shadow: 0 4px 24px rgba(149, 117, 205, 0.18);
+
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+
+  animation: morphToWheel 300ms ease-out;
+}
+
+.wheelExpanded:active {
+  cursor: grabbing;
+}
+
+@keyframes morphToWheel {
+  from {
+    opacity: 0.5;
+    border-radius: clamp(0.5rem, 2vw, 0.75rem);
+    background: rgba(255, 255, 255, 0.8);
+  }
+  to {
+    opacity: 1;
+    border-radius: clamp(0.75rem, 3vw, 1rem);
+    background: rgba(235, 225, 248, 0.75);
+  }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   WHEEL MASK
+   ════════════════════════════════════════════════════════════════ */
+
+.wheelMask {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 20%,
+    black 80%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    black 20%,
+    black 80%,
+    transparent 100%
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════
+   SELECTION INDICATOR
+   top + height are set via inline style in the component so they
+   always match the dynamic itemHeight regardless of screen size.
+   ════════════════════════════════════════════════════════════════ */
+
+.selectionIndicator {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 2;
+  border-top: 1.5px solid rgba(0, 0, 0, 0.18);
+  border-bottom: 1.5px solid rgba(0, 0, 0, 0.18);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   WHEEL TRACK & ITEMS
+   ════════════════════════════════════════════════════════════════ */
+
+.wheelTrack {
+  position: relative;
+  width: 100%;
+  will-change: transform;
+}
+
+.wheelItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  pointer-events: none;
+  transition:
+    opacity 120ms ease-out,
+    font-size 120ms ease-out;
+}
+
+.wheelItem[data-position="center"] {
+  font-size: clamp(3.5rem, 13vw, 5.5rem);
+  font-weight: 800;
+  opacity: 1;
+  color: #000000;
+}
+
+.wheelItem[data-position="near"] {
+  font-size: clamp(2.25rem, 8vw, 3.5rem);
+  font-weight: 400;
+  opacity: 0.45;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.wheelItem[data-position="far"] {
+  font-size: clamp(1.5rem, 5.5vw, 2.5rem);
+  font-weight: 300;
+  opacity: 0.2;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* ════════════════════════════════════════════════════════════════
+   ACCESSIBILITY
+   ════════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  .wheelTrack,
+  .wheelItem,
+  .wheelExpanded {
+    transition: none !important;
+    animation: none !important;
+  }
+}

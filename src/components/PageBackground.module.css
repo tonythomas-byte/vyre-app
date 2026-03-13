@@ -1,0 +1,53 @@
+.backgroundContainer {
+  min-height: 100vh;
+  height: auto; /* Allow content to determine height */
+  display: flex;
+  align-items: flex-start; /* Changed from center to flex-start for scrolling */
+  justify-content: center;
+  background: radial-gradient(219.15% 97.49% at 68.18% 98.35%, #fddaf6 0%, #fee8ed 30.77%, #fff9e2 74.45%, #fddaee 100%);
+  position: relative;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.flowerCarpetLeft {
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  z-index: 0;
+}
+
+.flowerCarpetRight {
+  position: absolute;
+  top: 2.5rem;
+  right: 1rem;
+  z-index: 0;
+}
+
+.glassmorphismOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(24px);
+  z-index: 1;
+}
+.contentWrapper {
+  position: relative;
+  z-index: 10; /* Content layer - highest */
+  width: 100%;
+  /* This ensures all children content appears above glassmorphism */
+}
+/* Responsive adjustments for 375px width screens */
+@media (max-width: 375px) {
+  .flowerCarpetLeft {
+    top: 0.5rem;
+    left: 0.5rem;
+  }
+  
+  .flowerCarpetRight {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+}

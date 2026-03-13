@@ -1,0 +1,283 @@
+/* Hero Section - Single semantic unit containing arch, avatar, and navigation */
+.heroSection {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0;
+  margin: 0;
+}
+
+/* Arch Container - Maintains aspect ratio and scales naturally */
+.archContainer {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  /* Responsive height based on width - slightly shorter for mobile */
+  aspect-ratio: 1.2 / 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: clamp(2rem, 8vw, 4rem);
+}
+
+/* Lavender gradient arch background - straight top, rounded bottom */
+.archBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffdbee; /* Pale rose color */
+  /* Straight top, rounded bottom arch - like an upside-down dome */
+  border-radius: 0 0 50% 50%;
+  z-index: 1;
+  pointer-events: none;
+  /* Subtle border for depth */
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: 
+    inset 0 2px 8px rgba(255, 255, 255, 0.5),
+    0 4px 16px rgba(253, 218, 246, 0.3);
+}
+
+/* Hero content - Avatar and greeting inside the arch */
+.heroContent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.75rem, 3vw, 1.5rem);
+  padding: 0 1rem;
+  margin-bottom: auto;
+}
+
+/* Avatar wrapper with clear spacing from arch edges */
+.avatarWrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(0.5rem, 2vw, 1rem);
+   margin-top: 2rem;
+
+}
+
+/* Avatar image - scales with arch using clamp */
+.avatarImage {
+  width: clamp(12rem, 14.75rem, 16rem); /* Increased size with 14.75rem as preferred */
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
+}
+
+.avatarImage:hover {
+  transform: scale(1.05);
+}
+
+/* Greeting text bubble - positioned relative to avatar */
+.greetingBubble {
+  position: absolute;
+  top: -0.5rem;
+  right: -1rem;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid rgba(253, 218, 246, 0.6);
+  border-radius: 1rem;
+  padding: 0.5rem 0.75rem;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  z-index: 3;
+}
+
+.greeting {
+  font-size: clamp(0.75rem, 3vw, 0.875rem);
+  font-weight: 500;
+  color: #4a5568;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* Remove old greeting text styles */
+.greetingText {
+  display: none;
+}
+
+/* Navigation icons container - positioned at bottom of arch on the curve */
+.archNavigation {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 clamp(1.5rem, 8vw, 3rem);
+  /* No transform needed - icons positioned at bottom naturally */
+}
+
+/* Navigation buttons - 50% inside arch (lavender bg), 50% outside (glassmorphism bg) */
+.navButton {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.125rem;
+  min-width: 5rem; /* Increased from 4.5rem */
+  min-height: 4rem; /* Decreased from 4.5rem */
+  width: clamp(5rem, 13vw, 6rem); /* Increased from 4.5rem-5.5rem to 5rem-6rem */
+  height: clamp(4rem, 11vw, 5rem); /* Decreased from 4.5rem-5.5rem to 4rem-5rem */
+  box-sizing: content-box;
+  padding: 0.5rem 0.25rem;
+  background: rgba(253, 218, 246, 0.6);
+  border: 2px solid rgba(253, 218, 246, 0.6);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  /* Left and right buttons positioned higher on arch slopes */
+  transform: translateY(-15px);
+}
+
+.navButton:hover {
+  transform: translateY(-17px) scale(1.08);
+  background: rgba(255, 255, 255, 1);
+  border-color: rgba(253, 218, 246, 0.8);
+  box-shadow: 
+    0 4px 12px rgba(253, 218, 246, 0.4),
+    0 2px 8px rgba(0, 0, 0, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+.navButton:active {
+  transform: translateY(-15px) scale(0.98);
+  box-shadow: 
+    0 1px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Center button - positioned at the lowest point (keystone of arch) */
+.centerButton {
+  transform: translateY(30px); /* Moved down to 30px */
+}
+
+.centerButton:hover {
+  transform: translateY(28px) scale(1.08); /* Adjusted hover state */
+}
+
+.centerButton:active {
+  transform: translateY(30px) scale(0.98); /* Adjusted active state */
+}
+
+/* Treasure button - left button with purple gradient */
+.treasureButton {
+  background: linear-gradient(190.24deg, rgba(203, 185, 255, 0.3) -1.9%, #E8E8E8 92.35%);
+  border: 2px solid rgba(203, 185, 255, 0.6);
+}
+
+.treasureButton:hover {
+  background: linear-gradient(190.24deg, rgba(203, 185, 255, 0.4) -1.9%, #F0F0F0 92.35%);
+}
+
+/* Journal button - center button with cyan gradient */
+.journalButton {
+  background: linear-gradient(165.37deg, rgba(168, 248, 255, 0.3) 6.02%, #CCF9FF 89.65%);
+  border: 2px solid rgba(168, 248, 255, 0.6);
+}
+
+.journalButton:hover {
+  background: linear-gradient(165.37deg, rgba(168, 248, 255, 0.4) 6.02%, #D9FCFF 89.65%);
+}
+
+/* Calendar button - right button with green gradient */
+.calendarButton {
+  background: linear-gradient(180deg, rgba(149, 245, 166, 0.3) 0%, #C8FFCF 99.04%);
+  border: 2px solid rgba(149, 245, 166, 0.6);
+}
+
+.calendarButton:hover {
+  background: linear-gradient(180deg, rgba(149, 245, 166, 0.4) 0%, #D5FFDD 99.04%);
+}
+
+/* Navigation icons */
+.navIcon {
+  width: auto;
+  height: 50%; /* Icon takes 70% of button height (adjusted for visual balance) */
+  max-width: 70%;
+  object-fit: contain;
+  opacity: 0.85;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.navButton:hover .navIcon {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Navigation labels - visible inside buttons */
+.navLabel {
+  font-family: 'Afacad', system-ui, sans-serif;
+  font-size: clamp(0.5rem, 2vw, 0.625rem);
+  font-weight: 500;
+  color: #4a5568;
+  line-height: 1.1;
+  text-align: center;
+  max-width: 90%;
+  flex-shrink: 0;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 375px) {
+  .archContainer {
+    padding-top: clamp(1.5rem, 6vw, 3rem);
+    aspect-ratio: 1.15 / 1;
+  }
+
+  .heroContent {
+    gap: clamp(0.5rem, 2vw, 1rem);
+  }
+
+  .archNavigation {
+    padding: 0 clamp(1rem, 6vw, 2rem);
+  }
+
+  .navButton {
+    min-width: 4.5rem; /* Increased width */
+    min-height: 3.5rem; /* Decreased height */
+  }
+}
+
+@media (max-width: 320px) {
+  .archContainer {
+    padding-top: clamp(1rem, 5vw, 2.5rem);
+    aspect-ratio: 1.1 / 1;
+  }
+
+  .archNavigation {
+    padding: 0 clamp(0.75rem, 5vw, 1.5rem);
+  }
+
+  .greeting {
+    font-size: clamp(0.8rem, 3.5vw, 1rem);
+  }
+}
+
+/* Responsive adjustments for larger mobile screens */
+@media (min-width: 400px) {
+  .archContainer {
+    aspect-ratio: 1.25 / 1;
+  }
+}

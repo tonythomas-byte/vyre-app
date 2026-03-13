@@ -1,0 +1,226 @@
+/* MoodSelector — Avatar: circular 3D | Floral: horizontal translateX */
+
+.moodSelectorContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1rem);
+  padding: 0;
+  position: relative;
+  transform: translateY(-70px);
+}
+
+/* ── Popup ── */
+.popup {
+  position: absolute;
+  top: -3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1.25rem, 4vw, 2rem);
+  border-radius: clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(0.875rem, 3vw, 1rem);
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+  z-index: 100;
+  white-space: nowrap;
+  animation: popupFadeIn 300ms ease-out;
+}
+
+@keyframes popupFadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0);    }
+}
+
+/* ── Avatar Carousel Wrapper ── */
+.carouselWrapper {
+  width: 100%;
+  height: clamp(150px, 48vw, 240px);
+  position: relative;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  perspective: clamp(500px, 120vw, 900px);
+  perspective-origin: 50% 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.carouselWrapper:active { cursor: grabbing; }
+
+/* Avatar stage — fixed size, items fan out via rotateY + translateZ */
+.carouselStage {
+  position: relative;
+  width: clamp(90px, 27vw, 150px);
+  height: clamp(90px, 27vw, 150px);
+  transform-style: preserve-3d;
+  flex-shrink: 0;
+}
+
+.carouselItem {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: clamp(90px, 27vw, 150px);
+  height: clamp(90px, 27vw, 150px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  transform-origin: center center;
+  cursor: pointer;
+}
+
+.carouselItem.active { z-index: 10; }
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center center;
+  display: block;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,0.15));
+  pointer-events: none;
+  transition: filter 300ms ease-out;
+}
+
+.carouselItem.active .avatarImage {
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.25));
+}
+
+/* ── Shadow Circle ── */
+.shadowCircle {
+  width: clamp(90px, 27vw, 150px);
+  height: clamp(18px, 5.5vw, 30px);
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 50%,
+    rgba(100,100,100,0.75) 0%,
+    rgba(100,100,100,0.35) 55%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  flex-shrink: 0;
+  z-index: 10;
+  position: relative;
+  transform: translateY(-15px);
+}
+
+/* ── Floral Wrapper ── */
+.floralWrapper {
+  width: 100%;
+  height: clamp(70px, 21vw, 115px);  /* decreased from clamp(80px, 24vw, 130px) */
+  position: relative;
+  /* perspective here so translateZ depth renders on items */
+  perspective: clamp(300px, 80vw, 600px);
+  perspective-origin: 50% 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+/*
+  Floral stage: FULL WIDTH so translateX items never escape bounds.
+  preserve-3d so translateZ works on children.
+  Height = one floral item size.
+*/
+.floralStage {
+  position: relative;
+  width: 100%;
+  height: clamp(50px, 15vw, 85px);  /* decreased from clamp(60px, 18vw, 100px) */
+  transform-style: preserve-3d;
+}
+
+/*
+  Floral item: anchored at left:50% + negative margin so offset=0
+  lands exactly at the horizontal center of the stage.
+  All translateX moves are then relative to that center point.
+  transform-origin: center center keeps scale stable on the plane.
+*/
+.floralItem {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: clamp(50px, 15vw, 85px);   /* decreased from clamp(60px, 18vw, 100px) */
+  height: clamp(50px, 15vw, 85px);  /* decreased from clamp(60px, 18vw, 100px) */
+  margin-top: calc(clamp(50px, 15vw, 85px) / -2);   /* updated to match new size */
+  margin-left: calc(clamp(50px, 15vw, 85px) / -2);  /* updated to match new size */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  transform-origin: center center;
+  pointer-events: none;
+}
+
+.floralItem.activeFloral { z-index: 10; }
+
+.floralImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 375px) {
+  .carouselWrapper { height: 90px; }
+  .floralWrapper   { height: 56px; }
+  .popup           { top: -2.5rem; font-size: 0.8125rem; }
+}
+
+@media (max-width: 320px) {
+  .carouselWrapper { height: 80px; }
+  .carouselStage   { width: 55px; height: 55px; }
+  .carouselItem    { width: 55px; height: 55px; }
+  .floralWrapper   { height: 58px; }
+  .floralItem      { width: 42px; height: 42px; margin-top: -21px; margin-left: -21px; }
+  .shadowCircle    { width: 55px; height: 11px; }
+  .popup           { top: -2rem; padding: 0.625rem 1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carouselItem, .floralItem, .avatarImage, .floralImage, .popup {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+/* Avatar-specific overrides to match cry avatar (index 3) sizing */
+/* Adjust each avatar so face/head appears same size when centered */
+.carouselItem:nth-child(1) .avatarImage { 
+  /* sad avatar adjustments */
+  width: 95%; 
+  height: 95%; 
+}
+
+.carouselItem:nth-child(2) .avatarImage { 
+  /* happy avatar adjustments */
+  width: 90%; 
+  height: 90%; 
+}
+
+.carouselItem:nth-child(3) .avatarImage { 
+  /* cry avatar - reference, no adjustment needed */
+  width: 100%; 
+  height: 100%; 
+}
+
+.carouselItem:nth-child(4) .avatarImage { 
+  /* confused avatar adjustments */
+  width: 92%; 
+  height: 92%; 
+  padding-bottom: 8%;
+}
+
+.carouselItem:nth-child(5) .avatarImage { 
+  /* angry avatar adjustments */
+  width: 93%; 
+  height: 93%; 
+}

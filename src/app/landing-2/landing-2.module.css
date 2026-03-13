@@ -1,0 +1,77 @@
+/* Mobile-first page layout - natural document flow */
+
+/* Page container - centers content and constrains width */
+.pageContainer {
+  position: relative; /* Establishes stacking context for decorative layers */
+  width: 100%;
+  max-width: 26.875rem; /* 430px mobile constraint */
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scroll from extending decorative elements */
+  z-index: 0; /* Root stacking context */
+}
+
+/* Content section - flows naturally after hero+navigation */
+.contentSection {
+  position: relative; /* Establishes stacking context */
+  z-index: 10; /* Above decorative florals (z-index: 2) */
+  padding: clamp(4.5rem, 11vw, 5.5rem) 1rem clamp(2rem, 6vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 4vw, 2rem);
+}
+
+.contentSection h2 {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+  text-align: center;
+}
+
+.contentSection p {
+  font-size: clamp(0.875rem, 4vw, 1rem);
+  color: #5a6c7d;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Footer section - natural end of page */
+.footerSection {
+  position: relative; /* Establishes stacking context */
+  z-index: 10; /* Above decorative florals (z-index: 2) */
+  margin-top: 0;
+  padding: 0 clamp(1rem, 4vw, 1.5rem) clamp(2rem, 6vw, 3rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 360px) {
+  .pageContainer {
+    padding: 0;
+  }
+  
+  .contentSection {
+    padding: clamp(2.5rem, 7vw, 3rem) 0.75rem clamp(1.5rem, 5vw, 2.5rem);
+    gap: 1.25rem;
+  }
+  
+  .footerSection {
+    padding: 1rem 0.75rem 1.5rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .contentSection {
+    padding: 2.5rem 0.5rem 1.5rem;
+    gap: 1rem;
+  }
+  
+  .footerSection {
+    padding: 0.75rem 0.5rem 1.25rem;
+  }
+}

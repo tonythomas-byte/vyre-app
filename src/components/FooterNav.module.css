@@ -1,0 +1,112 @@
+/* FooterNav.module.css */
+
+.footerNav {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0;
+  background: transparent;
+  position: relative;
+  margin-top: clamp(0.5rem, 2vw, 0.75rem);
+  max-width: 19.625rem; /* Match card components max-width */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.navButton {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  color: rgba(255, 255, 255, 0.7);
+  flex-shrink: 0;
+}
+
+.navButton:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.navButton:active {
+  transform: scale(0.95);
+}
+
+/* Regular icon buttons (F1, F2, f3, f4) */
+.icon {
+  width: clamp(1.5rem, 6vw, 2rem);
+  height: clamp(1.5rem, 6vw, 2rem);
+  object-fit: contain;
+  filter: brightness(0) saturate(100%) invert(32%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(95%) contrast(90%);
+  transition: filter 0.2s ease;
+}
+
+.navButton:hover .icon {
+  filter: brightness(0) saturate(100%) invert(20%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(90%) contrast(95%);
+}
+
+/* Center avatar button — slightly larger but same level as other icons */
+.avatarButton {
+  position: relative;
+  transform: translateY(0);
+  margin-top: clamp(-1rem, -3vw, -0.5rem); /* Allow avatar to extend upward */
+}
+
+.avatarButton:hover {
+  transform: translateY(0) scale(1.05);
+}
+
+.avatarButton:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.avatar {
+  width: clamp(4.5rem, 18vw, 6rem);
+  height: clamp(4.5rem, 18vw, 6rem);
+  border-radius: 50%;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Accessibility: focus states */
+.navButton:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.6);
+  outline-offset: 4px;
+  border-radius: 50%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 375px) {
+  .footerNav {
+    max-width: 100%;
+    margin-left: clamp(0.75rem, 3vw, 1rem);
+    margin-right: clamp(0.75rem, 3vw, 1rem);
+  }
+}
+
+@media (max-width: 320px) {
+  .footerNav {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+  
+  .avatar {
+    width: clamp(2.5rem, 10vw, 3rem);
+    height: clamp(2.5rem, 10vw, 3rem);
+  }
+}

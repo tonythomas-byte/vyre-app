@@ -1,0 +1,234 @@
+.moodSelectorContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  padding: clamp(1rem, 3vw, 2rem) 0;
+  position: relative;
+}
+
+/* ============================================
+   POPUP MESSAGE - Initial instruction
+   ============================================ */
+
+.popup {
+  position: absolute;
+  top: -3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1.25rem, 4vw, 2rem);
+  border-radius: clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(0.875rem, 3vw, 1rem);
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.75);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+  z-index: 100;
+  white-space: nowrap;
+  animation: popupFadeIn 300ms ease-out;
+}
+
+@keyframes popupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ============================================
+   AVATAR CAROUSEL - Shows 3 items at once
+   ============================================ */
+
+.carouselWrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+  position: relative;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  padding: clamp(1rem, 3vw, 2rem) 0;
+}
+
+.carouselWrapper:active {
+  cursor: grabbing;
+}
+
+/* Carousel Track - Displays 3 items (33.333% each) */
+.carouselTrack {
+  display: flex;
+  align-items: center;
+  width: 300%; /* 3 items × 100% = 300% */
+  transition: none;
+}
+
+/* Snap animation - 250ms as per documentation */
+.carouselTrack.animating {
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Individual Avatar Slide - 33.333% width (3 items visible) */
+.avatarSlide {
+  flex: 0 0 33.333%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  /* Medium gap between avatars via padding */
+  padding: 0 clamp(0.5rem, 2vw, 1rem);
+  /* Smooth transition for progressive disclosure */
+  transition: opacity 300ms ease-out;
+}
+
+.avatarSlide.active {
+  z-index: 2;
+}
+
+/* Avatar Image - The clickable image itself */
+.avatarImage {
+  width: clamp(80px, 25vw, 140px);
+  height: clamp(80px, 25vw, 140px);
+  object-fit: contain;
+  filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.08))
+          drop-shadow(0 2px 8px rgba(0, 0, 0, 0.04));
+  transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+/* ============================================
+   SHADOW CIRCLE - Fixed between avatars & florals
+   ============================================ */
+
+.shadowCircle {
+  width: clamp(100px, 30vw, 160px);
+  height: clamp(40px, 12vw, 64px);
+  background: radial-gradient(
+    ellipse 100% 100% at center,
+    rgba(180, 180, 180, 0.8) 0%,
+    rgba(180, 180, 180, 0.4) 50%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  position: relative;
+  margin: clamp(0.75rem, 3vw, 1.5rem) 0;
+  filter: blur(8px);
+  opacity: 0.6;
+}
+
+/* ============================================
+   FLORAL INDICATORS - Shows 3 at once, synced with avatars
+   ============================================ */
+
+.floralWrapper {
+  width: 100%;
+  max-width: 100%;
+  overflow: visible;
+  position: relative;
+  padding: clamp(1rem, 3vw, 2rem) 0;
+}
+
+/* Floral Track - Synced with avatar carousel */
+.floralTrack {
+  display: flex;
+  align-items: center;
+  width: 300%; /* Same as avatars - 3 items × 100% */
+  transition: none;
+}
+
+/* Snap animation - 250ms matching avatars */
+.floralTrack.animating {
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Individual Floral Slide - 33.333% width (directly under avatars) */
+.floralSlide {
+  flex: 0 0 33.333%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Medium gap between florals via padding */
+  padding: 0 clamp(0.5rem, 2vw, 1rem);
+  /* Smooth transition for progressive disclosure and updates */
+  transition: opacity 150ms ease-out;
+}
+
+/* Floral Image */
+.floralImage {
+  width: clamp(32px, 10vw, 50px);
+  height: clamp(32px, 10vw, 50px);
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+  transition: transform 250ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none; /* Non-clickable */
+}
+
+.activeFloral .floralImage {
+  filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.12));
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 375px) {
+  .avatarSlide,
+  .floralSlide {
+    padding: 0 0.375rem;
+  }
+  
+  .shadowCircle {
+    margin: 0.5rem 0;
+  }
+  
+  .popup {
+    top: -2.5rem;
+    font-size: 0.8125rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .avatarImage {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .floralImage {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .shadowCircle {
+    width: 90px;
+    height: 36px;
+  }
+  
+  .popup {
+    top: -2rem;
+    padding: 0.625rem 1rem;
+  }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .carouselTrack,
+  .floralTrack,
+  .avatarImage,
+  .floralImage,
+  .popup {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+

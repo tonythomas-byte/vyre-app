@@ -1,0 +1,69 @@
+.phoneInputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid #666666;
+  transition: border-color 0.3s ease;
+}
+
+.inputFocused {
+  border-bottom-color: #4a6cf7;
+}
+
+.inputError {
+  border-bottom-color: #060606;
+}
+
+.countryCode {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.flag {
+  width: 28px;
+  height: 20px;
+  border-radius: 2px;
+}
+
+.dropdownIcon {
+  font-size: 10px;
+  color: #666666;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background: #666666;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: 'Afacad', sans-serif;
+  font-size: 15px;
+  color: #000000;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #999999;
+}
+
+.errorMessage {
+  font-family: 'Afacad', sans-serif;
+  font-size: 12px;
+  color: #ff4444;
+  margin-top: 4px;
+}

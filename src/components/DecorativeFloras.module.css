@@ -1,0 +1,152 @@
+/* DecorativeFloras.module.css */
+
+/* ===== HERO DECORATIVE LAYER ===== */
+.heroDecorativeLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Behind hero elements - only visible portions show through */
+  pointer-events: none; /* Clicks pass through to content below */
+}
+
+/* Top Under Hero Avatar - Halo Effect */
+.topUnderAvatarImage {
+  position: absolute;
+  top: clamp(3rem, 9vw, 4.5rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(8rem, 35vw, 10rem);
+  height: auto;
+  opacity: 1;
+  object-fit: contain;
+  display: block;
+}
+
+/* ===== PAGE DECORATIVE LAYER ===== */
+.pageDecorativeLayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Behind all semantic elements - only visible portions show through */
+  pointer-events: none; /* Clicks pass through to content below */
+}
+
+/* Left Middle */
+.leftMiddleImage {
+  position: absolute;
+  top: 13.5rem;
+  left: clamp(-0.5rem, 0vw, 1rem);
+  width: clamp(12rem, 50vw, 18rem);
+  height: auto;
+  opacity: 1;
+  object-fit: contain;
+  display: block;
+}
+
+/* Right Middle */
+.rightMiddleImage {
+  position: absolute;
+  top: 20.375rem;
+  right: clamp(-0.5rem, 0vw, 1rem);
+  width: clamp(12rem, 50vw, 18rem);
+  height: auto;
+  opacity: 1;
+  object-fit: contain;
+  display: block;
+}
+
+/* Bottom Middle */
+.bottomMiddleImage {
+  position: absolute;
+  top: 35rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(20rem, 90vw, 32rem);
+  height: auto;
+  opacity: 1;
+  object-fit: contain;
+  display: block;
+}
+
+/* ===== RESPONSIVE BEHAVIOR ===== */
+
+/* Small Mobile (320px) - Maintain proportional sizing and positioning */
+@media (max-width: 320px) {
+  .topUnderAvatarImage {
+    opacity: 0.8; /* Slightly reduced on smallest screens */
+  }
+  
+  .leftMiddleImage,
+  .rightMiddleImage,
+  .bottomMiddleImage {
+    opacity: 0.9; /* Slightly reduced opacity for balance */
+  }
+  
+  .leftMiddle {
+    left: clamp(-5rem, -25vw, -3rem); /* Less extension on small screens */
+  }
+  
+  .rightMiddle {
+    right: clamp(-4rem, -18vw, -2rem); /* Adjusted extension */
+  }
+}
+
+/* Standard Mobile (375px) - Standard visibility */
+@media (min-width: 321px) and (max-width: 375px) {
+  .topUnderAvatarImage {
+    opacity: 0.9; /* Standard halo visibility */
+  }
+  
+  .leftMiddleImage,
+  .rightMiddleImage,
+  .bottomMiddleImage {
+    opacity: 1; /* Full visibility */
+  }
+}
+
+/* Large Mobile (430px+) - Full visibility */
+@media (min-width: 376px) {
+  .topUnderAvatarImage {
+    opacity: 1; /* Full halo visibility */
+  }
+  
+  .leftMiddleImage,
+  .rightMiddleImage,
+  .bottomMiddleImage {
+    opacity: 1; /* Full visibility */
+  }
+}
+
+/* Prevent horizontal scroll from extending elements */
+@media (max-width: 430px) {
+  .heroDecorativeLayer,
+  .pageDecorativeLayer {
+    overflow: hidden; /* Clip extending elements if needed */
+  }
+}
+
+/* ===== ACCESSIBILITY & PERFORMANCE ===== */
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .topUnderAvatarImage,
+  .leftMiddleImage,
+  .rightMiddleImage,
+  .bottomMiddleImage {
+    transition: none;
+  }
+}
+
+/* High contrast mode adjustments */
+@media (prefers-contrast: high) {
+  .topUnderAvatarImage,
+  .leftMiddleImage,
+  .rightMiddleImage,
+  .bottomMiddleImage {
+    opacity: 0.3; /* Reduce opacity in high contrast mode */
+  }
+}

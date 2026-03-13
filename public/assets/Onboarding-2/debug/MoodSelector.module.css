@@ -1,0 +1,235 @@
+/* MoodSelector — Horizontal translateX + translateZ Carousel */
+
+/* ============================================
+   CONTAINER
+   Natural flexbox column, gap for spacing,
+   relative so popup can anchor to it
+   ============================================ */
+
+.moodSelectorContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.5rem, 2vw, 1rem);
+  padding: clamp(1rem, 3vw, 2rem) 0;
+  position: relative;
+}
+
+/* ============================================
+   POPUP
+   ============================================ */
+
+.popup {
+  position: absolute;
+  top: -3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1.25rem, 4vw, 2rem);
+  border-radius: clamp(1.5rem, 4vw, 2rem);
+  font-size: clamp(0.875rem, 3vw, 1rem);
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.75);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.12),
+    0 2px 8px rgba(0, 0, 0, 0.06);
+  z-index: 100;
+  white-space: nowrap;
+  animation: popupFadeIn 300ms ease-out;
+}
+
+@keyframes popupFadeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-8px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0);    }
+}
+
+/* ============================================
+   AVATAR CAROUSEL WRAPPER
+   - Full width, fixed height via clamp
+   - perspective here so 3D depth renders correctly
+   - overflow: visible so side items aren't clipped
+   - cursor + touch-action for drag UX
+   ============================================ */
+
+.carouselWrapper {
+  width: 100%;
+  height: clamp(160px, 52vw, 280px);
+  position: relative;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+  perspective: clamp(500px, 120vw, 900px);
+  perspective-origin: 50% 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.carouselWrapper:active {
+  cursor: grabbing;
+}
+
+/* ============================================
+   AVATAR STAGE
+   - Fixed size = one avatar item (140px)
+   - preserve-3d so translateZ works on children
+   - Items fan out from this center point via translateX
+   ============================================ */
+
+.carouselStage {
+  position: relative;
+  width: clamp(80px, 26vw, 140px);
+  height: clamp(80px, 26vw, 140px);
+  transform-style: preserve-3d;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   AVATAR ITEM
+   - absolute + inset: 0 + margin: auto
+     → stacks all items at the exact center of the stage
+   - transform-origin: center center
+     → scale CSS property won't shift the item vertically
+   - All positioning via JS: translateX + translateZ
+   ============================================ */
+
+.carouselItem {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: clamp(80px, 26vw, 140px);
+  height: clamp(80px, 26vw, 140px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  transform-origin: center center;
+  cursor: pointer;
+}
+
+.carouselItem.active {
+  z-index: 10;
+}
+
+.avatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.15));
+  pointer-events: none;
+  transition: filter 300ms ease-out;
+}
+
+.carouselItem.active .avatarImage {
+  filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.25));
+}
+
+/* ============================================
+   SHADOW CIRCLE
+   Between avatar and floral carousels
+   ============================================ */
+
+.shadowCircle {
+  width: clamp(80px, 26vw, 140px);
+  height: clamp(16px, 5vw, 28px);
+  background: radial-gradient(
+    ellipse 100% 100% at 50% 50%,
+    rgba(160, 160, 160, 0.55) 0%,
+    rgba(160, 160, 160, 0.20) 55%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  filter: blur(6px);
+  flex-shrink: 0;
+}
+
+/* ============================================
+   FLORAL WRAPPER — mirrors avatar wrapper
+   ============================================ */
+
+.floralWrapper {
+  width: 100%;
+  height: clamp(64px, 20vw, 104px);
+  position: relative;
+  perspective: clamp(300px, 80vw, 600px);
+  perspective-origin: 50% 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.floralStage {
+  position: relative;
+  width: clamp(32px, 10vw, 52px);
+  height: clamp(32px, 10vw, 52px);
+  transform-style: preserve-3d;
+  flex-shrink: 0;
+}
+
+.floralItem {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: clamp(32px, 10vw, 52px);
+  height: clamp(32px, 10vw, 52px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  transform-origin: center center;
+  pointer-events: none;
+}
+
+.floralItem.activeFloral {
+  z-index: 10;
+}
+
+.floralImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  transition: opacity 300ms ease-out;
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+
+@media (max-width: 375px) {
+  .carouselWrapper { height: 140px; }
+  .floralWrapper   { height: 56px;  }
+  .popup           { top: -2.5rem; font-size: 0.8125rem; }
+}
+
+@media (max-width: 320px) {
+  .carouselWrapper { height: 120px; }
+  .carouselStage   { width: 70px; height: 70px; }
+  .carouselItem    { width: 70px; height: 70px; }
+  .floralWrapper   { height: 48px; }
+  .floralStage     { width: 28px; height: 28px; }
+  .floralItem      { width: 28px; height: 28px; }
+  .shadowCircle    { width: 70px; height: 14px; }
+  .popup           { top: -2rem; padding: 0.625rem 1rem; }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .carouselItem,
+  .floralItem,
+  .avatarImage,
+  .floralImage,
+  .popup {
+    transition: none !important;
+    animation: none !important;
+  }
+}

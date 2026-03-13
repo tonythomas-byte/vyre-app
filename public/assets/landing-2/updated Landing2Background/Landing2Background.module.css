@@ -1,0 +1,10 @@
+/* Override only the background gradient for landing-2 page */
+/* Target the first div child of landing2Wrapper (which is PageBackground's backgroundContainer) */
+.landing2Wrapper > div:first-child {
+  background: linear-gradient(180deg, 
+    #fef7e0 0%,     /* Top - cream/beige */
+    #fef5d3 25%,    /* Upper middle */
+    #fffef7 50%,    /* Center - lightest */
+    #87ceeb 100%    /* Bottom - light blue */
+  ) !important;
+}
