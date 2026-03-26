@@ -14,14 +14,14 @@ interface Activity {
 }
 
 const activities: Activity[] = [
-  { id: 'work',        icon: '/assets/journal/work.svg',                                label: 'Work'     },
-  { id: 'pet',         icon: '/assets/journal/pet.svg',                                 label: 'Pet'      },
-  { id: 'blender',     icon: '/assets/journal/ic_baseline-blender.svg',                 label: 'Shld'     },
-  { id: 'camera',      icon: '/assets/journal/Vector.svg',                              label: 'Shvld'    },
-  { id: 'party',       icon: '/assets/journal/material-symbols_sports-bar-rounded.svg', label: 'Party'    },
-  { id: 'jogging',     icon: '/assets/journal/Vector (1).svg',                          label: 'Jogging'  },
-  { id: 'agriculture', icon: '/assets/journal/ic_baseline-agriculture.svg',             label: 'Shldshld' },
-  { id: 'castle',      icon: '/assets/journal/ic_baseline-castle.svg',                  label: 'Shld'     },
+  { id: 'work',        icon: '/assets/icons/journal/work.svg',                                label: 'Work'     },
+  { id: 'pet',         icon: '/assets/icons/journal/pet.svg',                                 label: 'Pet'      },
+  { id: 'blender',     icon: '/assets/icons/journal/ic_baseline-blender.svg',                 label: 'Shld'     },
+  { id: 'camera',      icon: '/assets/icons/journal/Vector.svg',                              label: 'Shvld'    },
+  { id: 'party',       icon: '/assets/icons/journal/material-symbols_sports-bar-rounded.svg', label: 'Party'    },
+  { id: 'jogging',     icon: '/assets/icons/journal/Vector (1).svg',                          label: 'Jogging'  },
+  { id: 'agriculture', icon: '/assets/icons/journal/ic_baseline-agriculture.svg',             label: 'Shldshld' },
+  { id: 'castle',      icon: '/assets/icons/journal/ic_baseline-castle.svg',                  label: 'Shld'     },
 ]
 
 export default function Journal2Page() {
@@ -69,7 +69,7 @@ export default function Journal2Page() {
         <div className={styles.heroSection}>
           <div className={styles.floralBackground}>
             <Image
-              src="/assets/journal/floral under avatar.svg"
+              src="/assets/icons/journal/floral under avatar.svg"
               alt="Floral decoration"
               width={140}
               height={140}

@@ -14,7 +14,7 @@ export default function PageBackground({ children }: PageBackgroundProps) {
       {/* Flower carpet decorations */}
       <div className={styles.flowerCarpetLeft}>
         <Image 
-          src="/assets/c1.svg" 
+          src="/assets/illustrations/landing/c1.svg" 
           alt="Flower carpet decoration" 
           width={120} 
           height={120}
@@ -24,7 +24,7 @@ export default function PageBackground({ children }: PageBackgroundProps) {
       
       <div className={styles.flowerCarpetRight}>
         <Image 
-          src="/assets/c2.svg" 
+          src="/assets/illustrations/landing/c2.svg" 
           alt="Flower carpet decoration" 
           width={120} 
           height={120}

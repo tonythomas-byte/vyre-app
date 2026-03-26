@@ -40,7 +40,7 @@ export default function Home() {
             aria-hidden="true"
           >
             <Image 
-              src="/assets/L/Group.svg" 
+              src="/assets/illustrations/splash/Group.svg" 
               alt="" 
               width={203} 
               height={295} 
@@ -54,7 +54,7 @@ export default function Home() {
             aria-hidden="true"
           >
             <Image 
-              src="/assets/L/Group (1).svg" 
+              src="/assets/illustrations/splash/Group-1.svg" 
               alt="" 
               width={190} 
               height={295} 
@@ -68,7 +68,7 @@ export default function Home() {
             aria-hidden="true"
           >
             <Image 
-              src="/assets/L/Group (2).svg" 
+              src="/assets/illustrations/splash/Group-2.svg" 
               alt="" 
               width={347} 
               height={295} 

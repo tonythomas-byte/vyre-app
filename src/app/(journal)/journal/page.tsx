@@ -31,7 +31,7 @@ export default function JournalPage() {
           {/* Floral decoration behind character */}
           <div className={styles.floralBackground}>
             <Image
-              src="/assets/journal/floral under avatar.svg"
+              src="/assets/icons/journal/floral under avatar.svg"
               alt="Floral decoration"
               width={280}
               height={280}
@@ -112,7 +112,7 @@ export default function JournalPage() {
             aria-label="Scribble mode"
           >
             <Image
-              src="/assets/journal/scribble.svg"
+              src="/assets/icons/journal/scribble.svg"
               alt="Scribble mode"
               width={16}
               height={16}
@@ -125,7 +125,7 @@ export default function JournalPage() {
             aria-label="Music feature"
           >
             <Image
-              src="/assets/journal/audio.svg"
+              src="/assets/icons/journal/audio.svg"
               alt="Audio"
               width={16}
               height={16}
@@ -138,7 +138,7 @@ export default function JournalPage() {
             aria-label="Gallery and emojis"
           >
             <Image
-              src="/assets/journal/gallery.svg"
+              src="/assets/icons/journal/gallery.svg"
               alt="Gallery"
               width={16}
               height={16}

@@ -8,7 +8,7 @@ export default function DecorativeFloras() {
       {/* Top floral - above arch (z-index: 2) but behind avatar */}
       <div className={styles.heroDecorativeLayer} style={{ zIndex: 2 }}>
         <img
-          src="/assets/images/landing/top under hero avatar.png"
+          src="/assets/images/landing/top_under_hero_avatar.png"
           alt=""
           className={styles.topUnderAvatarImage}
         />
@@ -18,21 +18,21 @@ export default function DecorativeFloras() {
       <div className={styles.pageDecorativeLayer}>
         {/* Left Middle */}
         <img
-          src="/assets/images/landing/left middle.png"
+          src="/assets/images/landing/left_middle.png"
           alt=""
           className={styles.leftMiddleImage}
         />
         
         {/* Right Middle */}
         <img
-          src="/assets/images/landing/right middle.png"
+          src="/assets/images/landing/right_middle.png"
           alt=""
           className={styles.rightMiddleImage}
         />
         
         {/* Bottom Middle */}
         <img
-          src="/assets/images/landing/bottom middle.png"
+          src="/assets/images/landing/bottom_middle.png"
           alt=""
           className={styles.bottomMiddleImage}
         />

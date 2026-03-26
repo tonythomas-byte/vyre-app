@@ -14,14 +14,14 @@ interface Feeling {
 }
 
 const feelings: Feeling[] = [
-  { id: 'eccentric', icon: '/assets/journal/Vector.svg',                              label: 'Eccentric' },
-  { id: 'obscure',   icon: '/assets/journal/Vector (1).svg',                          label: 'Obscure'   },
-  { id: 'sdhgk',     icon: '/assets/journal/streamline_chess-king.svg',               label: 'sdhgk'     },
-  { id: 'sdhglx',    icon: '/assets/journal/Vector (5).svg',                          label: 'sdhglx'    },
-  { id: 'thankful',  icon: '/assets/journal/Vector (2).svg',                          label: 'Thankful'  },
-  { id: 'amused',    icon: '/assets/journal/mdi_super-chat-for-good.svg',             label: 'Amused'    },
-  { id: 'blissed',   icon: '/assets/journal/Vector (3).svg',                          label: 'Blissed'   },
-  { id: 'lgth',      icon: '/assets/journal/Vector (4).svg',                          label: 'lgth'      },
+  { id: 'eccentric', icon: '/assets/icons/journal/Vector.svg',                              label: 'Eccentric' },
+  { id: 'obscure',   icon: '/assets/icons/journal/Vector (1).svg',                          label: 'Obscure'   },
+  { id: 'sdhgk',     icon: '/assets/icons/journal/streamline_chess-king.svg',               label: 'sdhgk'     },
+  { id: 'sdhglx',    icon: '/assets/icons/journal/Vector (5).svg',                          label: 'sdhglx'    },
+  { id: 'thankful',  icon: '/assets/icons/journal/Vector (2).svg',                          label: 'Thankful'  },
+  { id: 'amused',    icon: '/assets/icons/journal/mdi_super-chat-for-good.svg',             label: 'Amused'    },
+  { id: 'blissed',   icon: '/assets/icons/journal/Vector (3).svg',                          label: 'Blissed'   },
+  { id: 'lgth',      icon: '/assets/icons/journal/Vector (4).svg',                          label: 'lgth'      },
 ]
 
 export default function Journal3Page() {
@@ -69,7 +69,7 @@ export default function Journal3Page() {
         <div className={styles.heroSection}>
           <div className={styles.floralBackground}>
             <Image
-              src="/assets/journal/floral under avatar.svg"
+              src="/assets/icons/journal/floral under avatar.svg"
               alt="Floral decoration"
               width={140}
               height={140}

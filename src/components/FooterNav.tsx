@@ -25,7 +25,7 @@ export default function FooterNav({ onNavigate }: FooterNavProps) {
         type="button"
       >
         <Image
-          src="/assets/landing-2/vyre-footer-nav/F1.svg"
+          src="/assets/icons/footer-nav/footer_1.svg"
           alt=""
           width={24}
           height={24}
@@ -40,7 +40,7 @@ export default function FooterNav({ onNavigate }: FooterNavProps) {
         type="button"
       >
         <Image
-          src="/assets/landing-2/vyre-footer-nav/F2.svg"
+          src="/assets/icons/footer-nav/footer_2.svg"
           alt=""
           width={24}
           height={24}
@@ -57,7 +57,7 @@ export default function FooterNav({ onNavigate }: FooterNavProps) {
       >
         <div className={styles.avatar}>
           <Image
-            src="/assets/landing-2/vyre-footer-nav/middle.svg"
+            src="/assets/icons/footer-nav/footer_3_avatar.svg"
             alt="User avatar"
             width={48}
             height={48}
@@ -74,7 +74,7 @@ export default function FooterNav({ onNavigate }: FooterNavProps) {
         type="button"
       >
         <Image
-          src="/assets/landing-2/vyre-footer-nav/f3.svg"
+          src="/assets/icons/footer-nav/footer_4.svg"
           alt=""
           width={24}
           height={24}
@@ -89,7 +89,7 @@ export default function FooterNav({ onNavigate }: FooterNavProps) {
         type="button"
       >
         <Image
-          src="/assets/landing-2/vyre-footer-nav/f4.svg"
+          src="/assets/icons/footer-nav/footer_5.svg"
           alt=""
           width={24}
           height={24}

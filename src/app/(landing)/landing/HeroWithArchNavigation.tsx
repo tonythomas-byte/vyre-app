@@ -53,7 +53,7 @@ export default function HeroWithArchNavigation({
             aria-label="Treasure"
           >
             <Image
-              src="/assets/images/landing/treasure.png"
+              src="/assets/nav%20icons/treasure.png"
               alt=""
               width={22}
               height={22}
@@ -68,7 +68,7 @@ export default function HeroWithArchNavigation({
             aria-label="Journal"
           >
             <Image
-              src="/assets/images/landing/journal.png"
+              src="/assets/nav%20icons/journal.png"
               alt=""
               width={26}
               height={26}
@@ -83,7 +83,7 @@ export default function HeroWithArchNavigation({
             aria-label="Calendar"
           >
             <Image
-              src="/assets/images/landing/calender.png"
+              src="/assets/nav%20icons/calender.png"
               alt=""
               width={22}
               height={22}
