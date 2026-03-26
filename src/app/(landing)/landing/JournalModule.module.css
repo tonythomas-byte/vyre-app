@@ -1,0 +1,165 @@
+/* JournalModule.module.css */
+
+.journalModule {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* Removed gap to attach pagination to card */
+  padding: 0 clamp(1rem, 4vw, 1.5rem);
+}
+
+.card {
+  width: 100%;
+  max-width: 19.625rem; /* 314px - following documentation pattern */
+  aspect-ratio: 314 / 144;
+  border-radius: 1.5rem; /* 24px */
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  margin: 0 auto; /* Center the card */
+}
+
+/* Glassmorphism background layer */
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/images/landing/cardbackground.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 0;
+}
+
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+/* 40% text section - left side */
+.textSection {
+  flex: 0 0 40%;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(0.75rem, 3vw, 1rem);
+  position: relative;
+}
+
+.status {
+  font-family: 'Afacad', system-ui, sans-serif;
+  font-size: clamp(0.625rem, 2.5vw, 0.75rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: clamp(0.5rem, 2vw, 0.75rem);
+}
+
+.title {
+  font-family: 'Afacad', system-ui, sans-serif;
+  font-size: clamp(1rem, 4vw, 1.25rem);
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* Soft blob background - positioned at bottom left */
+.dateBlob {
+  position: absolute;
+  bottom: 0; /* At the very bottom edge of card */
+  left: 0; /* At the very left edge of card */
+  /* CSS shape */
+  width: clamp(45px, 12vw, 60px);
+  aspect-ratio: 53 / 43;
+  border-radius: 21.5px 12px 12px 21.5px;
+  background: linear-gradient(135deg, #ced4ff 0%, #c1c8ff 100%);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  /* Fallback for browsers without backdrop-filter */
+  background: rgba(206, 212, 255, 0.85);
+  border: none;
+}
+
+.date {
+  position: absolute;
+  top: 50%;
+  left: 55%; /* Position date towards center-right of blob */
+  transform: translate(-50%, -50%);
+  font-family: 'Afacad', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: rgba(60, 60, 100, 0.9);
+  white-space: nowrap;
+  letter-spacing: -0.02em;
+  margin-left: 0.5rem; /* Increased from 0.25rem to push date more to center */
+}
+
+/* 60% image section - right side */
+.imageSection {
+  flex: 0 0 60%;
+  position: relative;
+  overflow: hidden;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+
+/* Pagination dots */
+.pagination {
+  display: flex;
+  justify-content: flex-start; /* Align to left as per documentation */
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0; /* Added vertical padding for spacing */
+  margin-left: clamp(2rem, 6vw, 3rem); /* Increased margin to move right */
+}
+
+.dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.3); /* Black for inactive dots */
+  transition: all 0.3s ease;
+}
+
+.dotActive {
+  background: #8F9AFF; /* Purple/blue for active dot */
+  width: 0.625rem;
+  height: 0.625rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 375px) {
+  .journalModule {
+    padding: 0 clamp(0.75rem, 3vw, 1rem);
+  }
+  
+  .card {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 320px) {
+  .textSection {
+    padding: clamp(0.5rem, 2.5vw, 0.75rem);
+  }
+}
