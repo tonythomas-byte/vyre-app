@@ -1,0 +1,230 @@
+.page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.25rem 1rem 2rem;
+  position: relative;
+}
+
+.back {
+  align-self: flex-start;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  color: #5c4d72;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font: inherit;
+}
+
+.back:hover {
+  color: #3d3550;
+}
+
+.pillList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+  align-items: center;
+}
+
+/* Month/year header */
+.monthHeader {
+  align-self: flex-start;
+  position: relative;
+  margin-bottom: 0.5rem;
+  padding-left: 0;
+}
+
+.monthBtn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.monthLabel {
+  font-family: 'Afacad', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #2d2d2d;
+}
+
+.dropArrow {
+  font-size: 0.75rem;
+  color: #2d2d2d;
+  margin-top: 2px;
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+  overflow: hidden;
+}
+
+.dropItem {
+  background: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  text-align: left;
+  font-family: 'Afacad', sans-serif;
+  font-size: 0.9rem;
+  color: #3d3550;
+  cursor: pointer;
+}
+
+.dropItem:hover {
+  background: #f3f0f8;
+}
+
+.dropItemActive {
+  font-weight: 700;
+  color: #5b4fa8;
+}
+
+/* "Entries" label */
+.entriesLabel {
+  align-self: flex-end;
+  font-family: 'Afacad', sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #939393;
+  margin: 0 0 0.75rem 0;
+  opacity: 0.7;
+}
+
+/* Calendar panel — absolute, flush to all edges at top */
+.calendarPanel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  min-height: 488px;
+  border-radius: 0 0 20px 20px;
+  background:
+    radial-gradient(95.61% 95.61% at 96.05% 97.27%,
+      rgba(255,255,255,0.1) 0%,
+      rgba(255,192,103,0.2) 100%);
+  backdrop-filter: blur(100px);
+  -webkit-backdrop-filter: blur(100px);
+  box-shadow:
+    0px 1.51px 60.5px 0px #2600FF33 inset,
+    0px 6.05px 27.23px 0px #FF6A004D inset,
+    0px 148.23px 151.26px -72.6px #D4D4D44D inset,
+    0px -124.03px 102.85px -96.8px #90446E4D inset,
+    0px 10.59px 16.64px -6.05px #FFFFFF inset,
+    0px 58.99px 84.7px -54.45px #FFFFFF80 inset;
+  padding: 2rem 1.25rem 1.5rem;
+}
+
+.calNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.navBtn {
+  background: rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.4);
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3d3550;
+}
+
+.calTitle {
+  text-align: center;
+}
+
+.calMonth {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #2d2d2d;
+  line-height: 1.1;
+}
+
+.calYear {
+  font-family: 'Afacad', sans-serif;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.calGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 14px 0;
+}
+
+.dayName {
+  font-family: 'Afacad', sans-serif;
+  font-size: 0.72rem;
+  color: #888;
+  text-align: center;
+  padding-bottom: 0.6rem;
+}
+
+.dayCell {
+  font-family: 'Afacad', sans-serif;
+  font-size: 0.85rem;
+  color: #2d2d2d;
+  text-align: center;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+.dayCell:hover:not(.dayCellEmpty) {
+  background: rgba(91, 79, 168, 0.15);
+}
+
+.dayCellToday {
+  background: #5b4fa8;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.dayCellEmpty {
+  color: #bbb;
+  cursor: default;
+}
+
+/* Invisible backdrop — click outside to close calendar */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 19;
+}
+
+/* Push pills down when calendar is open */
+.pillListPushed {
+  margin-top: 380px;
+}

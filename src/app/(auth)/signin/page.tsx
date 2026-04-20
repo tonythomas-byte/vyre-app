@@ -17,40 +17,10 @@ export default function SignInPage() {
   const [usernameOrEmail, setUsernameOrEmail] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
-  
-  const [errors, setErrors] = useState({
-    usernameOrEmail: '',
-    password: '',
-  })
-
-  const validateForm = () => {
-    const newErrors = {
-      usernameOrEmail: '',
-      password: '',
-    }
-
-    // Username or email validation
-    if (!usernameOrEmail.trim()) {
-      newErrors.usernameOrEmail = 'Username or email is required'
-    }
-
-    // Password validation
-    if (!password) {
-      newErrors.password = 'Password is required'
-    }
-
-    setErrors(newErrors)
-    return !newErrors.usernameOrEmail && !newErrors.password
-  }
 
   const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault()
-    
-    if (validateForm()) {
-      console.log('Sign in successful:', { usernameOrEmail, password, rememberMe })
-      // Navigate to onboarding
-      router.push('/onboarding')
-    }
+    router.push('/onboarding')
   }
 
   const handleForgotPassword = () => {
@@ -79,14 +49,12 @@ export default function SignInPage() {
 
         <div className={styles.formContainer}>
           {/* Signin Form */}
-          <form onSubmit={handleSignIn} className={styles.form}>
+          <form onSubmit={handleSignIn} className={styles.form} noValidate>
             <Input
               label="Username or email"
               type="text"
               value={usernameOrEmail}
               onChange={setUsernameOrEmail}
-              error={errors.usernameOrEmail}
-              required
             />
 
             <Input
@@ -94,8 +62,6 @@ export default function SignInPage() {
               type="password"
               value={password}
               onChange={setPassword}
-              error={errors.password}
-              required
             />
 
             {/* Remember me and Forgot password */}

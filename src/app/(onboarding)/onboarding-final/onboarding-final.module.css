@@ -10,6 +10,38 @@
   z-index: 2;
 }
 
+.backRow {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  margin-bottom: clamp(0.25rem, 1vw, 0.5rem);
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: 'Afacad', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.75);
+  transition: opacity 150ms ease;
+}
+
+.backButton:hover {
+  opacity: 0.8;
+}
+
+.backLabel {
+  line-height: 1;
+}
+
 /* Only lock height when wheel is expanded — prevents scroll during wheel interaction */
 .container.containerExpanded {
   height: 100dvh;

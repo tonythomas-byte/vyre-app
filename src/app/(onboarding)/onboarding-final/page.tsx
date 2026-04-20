@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { MdArrowBack } from 'react-icons/md'
 import PageBackground from '@/components/PageBackground'
 import WheelPicker from './WheelPicker'
 import Button from '@/components/Button'
@@ -74,21 +75,28 @@ export default function OnboardingFinal() {
 
   const handleContinue = () => {
     if (!continueEnabled) return
-    
-    // Save selections
-    console.log('Personal Info:', {
-      age,
-      employmentStatus
-    })
-    
-    // Navigate to next step (placeholder)
-    console.log('Onboarding complete!')
-    // router.push('/dashboard') or wherever next
+    router.push('/landing')
+  }
+
+  const handleBack = () => {
+    router.back()
   }
 
   return (
     <PageBackground>
       <div className={`${styles.container} ${isWheelExpanded ? styles.containerExpanded : ''}`}>
+        <div className={styles.backRow}>
+          <button
+            type="button"
+            className={styles.backButton}
+            onClick={handleBack}
+            aria-label="Go back"
+          >
+            <MdArrowBack size={22} aria-hidden />
+            <span className={styles.backLabel}>Back</span>
+          </button>
+        </div>
+
         {/* Progress Navigation */}
         <div className={styles.progressSection}>
           <div className={styles.progressIndicators}>
