@@ -1,44 +1,12 @@
-.page {
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 1.25rem 1rem 2rem;
+.wrapper {
   position: relative;
-}
-
-.back {
-  align-self: flex-start;
-  margin-bottom: 1.5rem;
-  font-size: 0.95rem;
-  color: #5c4d72;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font: inherit;
-}
-
-.back:hover {
-  color: #3d3550;
-}
-
-.pillList {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
   width: 100%;
-  align-items: center;
 }
 
-/* Month/year header */
 .monthHeader {
   align-self: flex-start;
   position: relative;
   margin-bottom: 0.5rem;
-  padding-left: 0;
 }
 
 .monthBtn {
@@ -64,54 +32,8 @@
   margin-top: 2px;
 }
 
-.dropdown {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  z-index: 10;
-  display: flex;
-  flex-direction: column;
-  min-width: 140px;
-  overflow: hidden;
-}
-
-.dropItem {
-  background: none;
-  border: none;
-  padding: 0.5rem 1rem;
-  text-align: left;
-  font-family: 'Afacad', sans-serif;
-  font-size: 0.9rem;
-  color: #3d3550;
-  cursor: pointer;
-}
-
-.dropItem:hover {
-  background: #f3f0f8;
-}
-
-.dropItemActive {
-  font-weight: 700;
-  color: #5b4fa8;
-}
-
-/* "Entries" label */
-.entriesLabel {
-  align-self: flex-end;
-  font-family: 'Afacad', sans-serif;
-  font-size: 1rem;
-  font-weight: 400;
-  color: #939393;
-  margin: 0 0 0.75rem 0;
-  opacity: 0.7;
-}
-
-/* Calendar panel — absolute, flush to all edges at top */
 .calendarPanel {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -217,14 +139,8 @@
   cursor: default;
 }
 
-/* Invisible backdrop — click outside to close calendar */
 .backdrop {
   position: fixed;
   inset: 0;
   z-index: 19;
-}
-
-/* Push pills down when calendar is open */
-.pillListPushed {
-  margin-top: 488px;
 }

@@ -89,6 +89,12 @@ export default function TreasurePillPage() {
                 <div
                   key={i}
                   className={`${styles.dayCell} ${day === today ? styles.dayCellToday : ''} ${!day ? styles.dayCellEmpty : ''}`}
+                  onClick={() => {
+                    if (day) {
+                      setOpen(false)
+                      router.push(`/treasure-pill/entries?date=${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`)
+                    }
+                  }}
                 >
                   {day ?? ''}
                 </div>

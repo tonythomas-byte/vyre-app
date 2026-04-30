@@ -1,0 +1,60 @@
+.page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.5rem 1rem 0;
+}
+
+/* Sticky header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  background: transparent;
+  padding-bottom: 0.5rem;
+  z-index: 10;
+}
+
+.back {
+  background: none;
+  border: none;
+  font-size: 1.75rem;
+  color: #2d2d2d;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.back:hover { color: #5b4fa8; }
+
+.title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #2d2d2d;
+  margin: 0;
+  flex: 1;
+}
+
+.entriesLabel {
+  font-size: 2rem;
+  color: #939393;
+  opacity: 0.7;
+}
+
+/* Scrollable list — natural flex column, no bottom padding */
+.entryList {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  width: 100%;
+  padding-top: 2.5rem;
+}
+
+.entryListPushed {
+  margin-top: 488px;
+}

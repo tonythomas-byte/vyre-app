@@ -1,0 +1,162 @@
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+/* ── Left day column ─────────────────────────────────────────── */
+.dayCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 2rem;
+  flex-shrink: 0;
+  /* align text with card content (below avatar overlap) */
+  padding-top: 60px;
+}
+
+.dayLabel {
+  font-size: 0.7rem;
+  color: #aaa;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.dateNumber {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e0457b;
+  line-height: 1.1;
+}
+
+/* ── Card wrapper ────────────────────────────────────────────── */
+.cardWrapper {
+  position: relative;
+  flex: 1;
+  margin-right: 2rem;
+  height: 160px;
+}
+
+/* ── Mood avatar above card ──────────────────────────────────── */
+/* Bottom half overlaps top-left of card, no circle, raw image */
+.avatarAbove {
+  position: absolute;
+  top: -49px;
+  left: 8px;
+  z-index: 0;
+  width: 74px;
+  height: 65px;
+}
+
+.avatarAboveImg {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* ── Card ────────────────────────────────────────────────────── */
+.card {
+  position: relative;
+  z-index: 1;
+  border-radius: 16px;
+  padding: 20px 16px 44px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  height: 160px;
+  max-height: 160px;
+  overflow: hidden;
+}
+
+.pink   { background: #e8409a; }
+.blue   { background: #3b9fe8; }
+.purple { background: #5b4fa8; }
+
+/* ── Circular thumbnail ──────────────────────────────────────── */
+.thumbnail {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.thumbnailImg {
+  object-fit: cover;
+}
+
+/* ── Vertical divider ────────────────────────────────────────── */
+.divider {
+  width: 1.5px;
+  align-self: stretch;
+  background: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+  border-radius: 1px;
+}
+
+/* ── Text block ──────────────────────────────────────────────── */
+.textBlock {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.time {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.description {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-width: 0;
+  word-break: break-word;
+}
+
+/* ── Bottom-right mood avatar circles ───────────────────────── */
+.avatarPair {
+  position: absolute;
+  bottom: 8px;
+  right: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.avatarCircle {
+  position: relative;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.15);
+  flex-shrink: 0;
+}
+
+.avatarImg {
+  object-fit: cover;
+}

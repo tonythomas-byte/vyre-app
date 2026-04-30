@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import PageBackground from '@/components/PageBackground'
-import styles from './landing.module.css'
+import styles from './home.module.css'
 
 export default function Home() {
   const router = useRouter()
