@@ -1,0 +1,290 @@
+.page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fdf0f4;
+  padding: clamp(2rem, 6vw, 3rem) 5% clamp(2rem, 6vw, 3rem);
+  gap: clamp(0.5rem, 2vw, 0.75rem);
+}
+
+/* ── Diamond gem ─────────────────────────────────────────────── */
+.diamondWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.diamond {
+  width: clamp(160px, 44vw, 200px);
+  height: auto;
+  filter: drop-shadow(0 4px 16px rgba(150, 80, 220, 0.4));
+}
+
+/* tilt runs after fadeInDown completes */
+.diamond.visible {
+  animation: tilt 2s ease-in-out infinite;
+}
+
+/* ── "3 left" ────────────────────────────────────────────────── */
+.leftCount {
+  margin: 0;
+  font-family: 'Afacad', sans-serif;
+  font-size: clamp(2.5rem, 10vw, 3.5rem);
+  font-weight: 700;
+  color: #919191;
+}
+
+/* bounce runs after fadeInDown completes */
+.leftCount.visible {
+  animation: bounce 1.5s ease-in-out infinite;
+}
+
+/* ── Animations ──────────────────────────────────────────────── */
+@keyframes tilt {
+  0%   { transform: rotate(0deg);   }
+  25%  { transform: rotate(5deg);   }
+  50%  { transform: rotate(0deg);   }
+  75%  { transform: rotate(-5deg);  }
+  100% { transform: rotate(0deg);   }
+}
+
+@keyframes bounce {
+  0%   { transform: translateY(0px);  }
+  50%  { transform: translateY(-4px); }
+  100% { transform: translateY(0px);  }
+}
+
+/* ── Main card ───────────────────────────────────────────────── */
+.card {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  border-radius: 32px;
+  background: linear-gradient(180deg, #ECE8E6 0%, #C7B3EC 45%, #8E6EF5 100%);
+  padding: clamp(1.25rem, 5vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  overflow: hidden;
+  margin-top: clamp(0.5rem, 2vw, 1rem);
+}
+
+/* ── Reveal card shell overlay ──────────────────────────────── */
+.revealShell {
+  position: fixed;
+  left: 50%;
+  top: 241px;
+  transform: translateX(-50%);
+  width: min(319px, calc(100vw - 18px));
+  height: 273px;
+  border-radius: 24px;
+  background: linear-gradient(129.33deg, #7B6FD4 0%, #9B8FE8 50%, #C4B5F4 100%);
+  box-shadow: 0px 4px 16.4px 9px #FFEA0040;
+  z-index: 1001;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 150ms ease-in;
+}
+
+.revealShell.fadeOut {
+  opacity: 0;
+}
+
+/* Blue/purple atmospheric blob — the magic layer */
+.blueBlob {
+  position: absolute;
+  width: 280px;
+  height: 540px;
+  left: -80px;
+  top: -40px;
+  background:
+    linear-gradient(180deg, rgba(0,255,163,0.58) 0%, rgba(51,0,255,0.2) 100%),
+    linear-gradient(149deg, rgba(255,46,0,0.45) 0%, rgba(20,0,255,0.85) 100%);
+  border-radius: 45% 55% 60% 40%;
+  transform: rotate(8deg);
+  filter: blur(70px);
+  opacity: 0.9;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Pink atmospheric wash */
+.pinkGlow {
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  left: -140px;
+  bottom: -180px;
+  background: radial-gradient(circle, rgba(255,120,220,0.35) 0%, transparent 70%);
+  filter: blur(90px);
+  opacity: 0.8;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Header row ──────────────────────────────────────────────── */
+.headerRow {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.calIconWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  z-index: 1;
+}
+
+/* Ecstatic font size increased */
+.moodTitle {
+  margin: 16px 0 0 0;
+  font-family: 'Afacad', sans-serif;
+  font-weight: 700;
+  font-size: clamp(2rem, 8vw, 3rem);
+  color: #ffffff;
+  text-align: right;
+  z-index: 1;
+}
+
+/* player — slightly above centre in the card */
+.playerImg {
+  position: absolute !important;
+  top: 34%;
+  transform: translateY(-59%);
+  right: 0;
+  width: clamp(120px, 40vw, 180px) !important;
+  height: clamp(200px, 55vw, 280px) !important;
+  pointer-events: none;
+}
+
+/* ── Song section — 28px below header ───────────────────────── */
+.songSection {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1;
+  margin-top: 60px;
+}
+
+.songLabel {
+  margin: 0;
+  font-family: 'Afacad', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.songName {
+  margin: 12px 0 0 0;
+  font-family: 'Afacad', sans-serif;
+  font-size: clamp(1.5rem, 6vw, 1.875rem);
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* ── Journal note box — editable textarea ────────────────────── */
+.noteBox {
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 14px;
+  padding: clamp(1.25rem, 5vw, 1.75rem) clamp(1.5rem, 6vw, 2rem);
+  z-index: 1;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: 'Afacad', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #2d2d2d;
+  line-height: 1.5;
+  min-height: 90px;
+}
+
+.noteBox::placeholder {
+  color: rgba(45, 45, 45, 0.4);
+  font-weight: 400;
+}
+
+/* ── Reflect heading ─────────────────────────────────────────── */
+.reflectHeading {
+  margin: 0;
+  font-family: 'Afacad', sans-serif;
+  font-size: clamp(1.25rem, 5vw, 1.75rem);
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  z-index: 1;
+}
+
+/* ── Swipe hint ──────────────────────────────────────────────── */
+.swipeHint {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1;
+}
+
+.swipeCaret {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1;
+}
+
+.swipeText {
+  font-family: 'Afacad', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #000000;
+}
+
+
+/* ── Bottom group — heading + swipe, pushed to bottom ───────── */
+.bottomGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 35px;
+  margin-top: auto;
+  padding-top: 22px;
+  padding-bottom: 0;
+  z-index: 1;
+  width: 100%;
+}
+
+/* ── Shared element transition animation classes ─────────────── */
+
+/* Hidden — invisible but in layout */
+.hidden {
+  opacity: 0;
+}
+
+/* Fade in */
+.fadeIn {
+  animation: fadeIn 200ms ease-in forwards;
+}
+
+/* Slide up from bottom */
+.slideUp {
+  animation: slideUp 300ms ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}

@@ -34,6 +34,7 @@ export default function Journal3Page() {
         return [...prev, feelingId]
       }
     })
+    router.push('/journal-4')
   }
 
   const handleOthersClick = () => {

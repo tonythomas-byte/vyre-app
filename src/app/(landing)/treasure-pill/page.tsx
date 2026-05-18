@@ -106,10 +106,10 @@ export default function TreasurePillPage() {
         <p className={styles.entriesLabel}>Entries</p>
 
         <div className={`${styles.pillList} ${open ? styles.pillListPushed : ''}`}>
-          <PillCard mood="Ecstatic" day="Sunday" date="February 8, 2026" />
-          <PillCard mood="Awe" day="Monday" date="February 9, 2026" />
-          <PillCard mood="Unique" day="Tuesday" date="February 10, 2026" />
-          <PillCard mood="Nile" day="Wednesday" date="February 11, 2026" />
+          <PillCard id="1" mood="Ecstatic" day="Sunday" date="February 8, 2026" />
+          <PillCard id="2" mood="Awe" day="Monday" date="February 9, 2026" />
+          <PillCard id="3" mood="Unique" day="Tuesday" date="February 10, 2026" />
+          <PillCard id="4" mood="Nile" day="Wednesday" date="February 11, 2026" />
         </div>
       </div>
     </PageBackground>

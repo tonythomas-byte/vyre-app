@@ -1,30 +1,53 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import { useRouter } from 'next/navigation'
 import { createPortal } from 'react-dom'
 import Image from 'next/image'
 import styles from './PillCard.module.css'
 
 interface PillCardProps {
+  id: string
   mood: string
   day: string
   date: string
 }
 
-export default function PillCard({ mood, day, date }: PillCardProps) {
+export default function PillCard({ id, mood, day, date }: PillCardProps) {
+  const router = useRouter()
   const [broken, setBroken] = useState(false)
-  const [cardOrigin, setCardOrigin] = useState({ x: '50%', y: '50%' })
+  const [navigating, setNavigating] = useState(false)
   const wrapperRef = useRef<HTMLDivElement>(null)
+  const didNavigate = useRef(false)
 
-  const handleClick = () => {
-    if (!broken && wrapperRef.current) {
-      const rect = wrapperRef.current.getBoundingClientRect()
-      // Center of the pill
-      const x = rect.left + rect.width / 2
-      const y = rect.top + rect.height / 2
-      setCardOrigin({ x: `${x}px`, y: `${y}px` })
-    }
-    setBroken(b => !b)
+  // Step 1: click pill → break open + show reveal card
+  const handlePillClick = () => {
+    if (!broken && !navigating) setBroken(true)
+  }
+
+  // Step 2: called once when the scale transition finishes
+  const handleRevealTransitionEnd = (e: React.TransitionEvent) => {
+    // Only react to the transform transition (longest one), ignore opacity
+    if (e.propertyName !== 'transform') return
+    if (!broken || didNavigate.current) return
+    didNavigate.current = true
+    setNavigating(true)
+
+    sessionStorage.setItem('pillTransition', JSON.stringify({
+      from: 'pill',
+      cardTop: 241,
+      cardLeft: window.innerWidth / 2 - Math.min(319, window.innerWidth - 18) / 2,
+      cardWidth: Math.min(319, window.innerWidth - 18),
+      cardHeight: 273,
+      timestamp: Date.now()
+    }))
+
+    // User sees the reveal card, then navigate at 400ms
+    setTimeout(() => {
+      router.push(
+        `/treasure-pill/pill/${id}?mood=${encodeURIComponent(mood)}&day=${encodeURIComponent(day)}&date=${encodeURIComponent(date)}`
+      )
+    }, 400)
   }
 
   return (
@@ -32,7 +55,7 @@ export default function PillCard({ mood, day, date }: PillCardProps) {
       <div
         ref={wrapperRef}
         className={`${styles.pillWrapper} ${broken ? styles.pillWrapperBroken : ''}`}
-        onClick={handleClick}
+        onClick={handlePillClick}
       >
         {/* Left half */}
         <div className={`${styles.pillLeft} ${broken ? styles.pillLeftBroken : ''}`}>
@@ -67,16 +90,29 @@ export default function PillCard({ mood, day, date }: PillCardProps) {
 
       {typeof window !== 'undefined' && createPortal(
         <>
-          {broken && (
-            <div className={styles.revealBackdrop} onClick={() => setBroken(false)} />
+          {/* Backdrop — click outside to close (only if not navigating) */}
+          {broken && !navigating && (
+            <div
+              className={styles.revealBackdrop}
+              onClick={() => setBroken(false)}
+            />
           )}
+
+          {/* Reveal card — stays visible until page navigates */}
           <div
             className={`${styles.revealCard} ${broken ? styles.revealCardOpen : ''}`}
-            onClick={(e) => e.stopPropagation()}
+            onTransitionEnd={handleRevealTransitionEnd}
+            style={{ cursor: 'default', pointerEvents: navigating ? 'none' : 'auto' }}
           >
             <div className={styles.revealTop}>
               <div className={styles.revealCalIcon}>
-                <Image src="/assets/icons/landing/calender.svg" alt="" width={71} height={75} className={styles.revealCalImg} />
+                <Image
+                  src="/assets/icons/landing/calender.svg"
+                  alt=""
+                  width={71}
+                  height={75}
+                  className={styles.revealCalImg}
+                />
                 <span className={styles.revealDate}>{day}, {date}</span>
               </div>
               <p className={styles.revealMood}>{mood}</p>

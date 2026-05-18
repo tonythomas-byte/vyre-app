@@ -11,9 +11,9 @@ export default function JournalPage() {
   const [title, setTitle] = useState('')
   const [notes, setNotes] = useState('')
 
-  const handleHeartbeatClick = () => console.log('Scribble mode (future)')
-  const handleMusicClick     = () => console.log('Audio (future)')
-  const handleGalleryClick   = () => console.log('Gallery (future)')
+  const handleScribbleClick = () => router.push('/journal-2')
+  const handleMusicClick    = () => console.log('Audio (future)')
+  const handleGalleryClick  = () => console.log('Gallery (future)')
 
   return (
     <div className={styles.pageContainer}>
@@ -26,7 +26,7 @@ export default function JournalPage() {
       />
 
       <div className={styles.actionButtons}>
-        <button className={styles.actionButton} onClick={handleHeartbeatClick} aria-label="Scribble mode">
+        <button className={styles.actionButton} onClick={handleScribbleClick} aria-label="Scribble mode">
           <Image src="/assets/icons/journal/scribble.svg" alt="Scribble mode" width={16} height={16} />
         </button>
         <button className={styles.actionButton} onClick={handleMusicClick} aria-label="Music feature">

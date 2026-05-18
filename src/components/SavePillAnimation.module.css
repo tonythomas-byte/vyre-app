@@ -1,0 +1,404 @@
+/* ── Full-screen overlay ─────────────────────────────────────── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(219.15% 97.49% at 68.18% 98.35%, #fddaf6 0%, #fee8ed 30.77%, #fff9e2 74.45%, #fddaee 100%);
+  overflow: hidden;
+}
+
+/* ── VYRE full-screen background ─────────────────────────────── */
+.vyreScreen {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 50% 40%, #fffde7 0%, #fef3e2 40%, #fddaf6 100%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+}
+.vyreVisible { opacity: 1; }
+
+/* ── VYRE label ──────────────────────────────────────────────── */
+.vyreLabel {
+  position: absolute;
+  top: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3rem, 18vw, 6rem);
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 0.25em;
+  color: #8D8D8D;
+  opacity: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+  z-index: 10;
+  transition: opacity 0.5s ease 0.3s;
+}
+.vyreLabelVisible { opacity: 0.35; }
+
+/* ── Pill scene ──────────────────────────────────────────────── */
+.pillScene {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: min(320px, 84vw);
+  height: min(136px, calc(84vw * 136 / 320));
+  border-radius: 999px;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  z-index: 5;
+}
+.pillFading {
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+/* ── Left half ───────────────────────────────────────────────── */
+.pillLeft {
+  flex: 0 0 50%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 999px 0 0 999px;
+  background: linear-gradient(135deg, #4A3F9F 0%, #6B5FBF 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: bottom right;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+.pillLeftOpen1 {
+  transform: rotate(-18deg) translateX(-36px) translateY(-8px);
+}
+/* Bottoms swing inward — pivot from top-right */
+.pillLeftSlight {
+  transform-origin: top right;
+  transform: rotate(-14deg);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.pillLeftOpen2 {
+  transform: rotate(-22deg) translateX(-44px) translateY(-12px);
+}
+
+/* ── Floral/mandala ──────────────────────────────────────────── */
+.floralWrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1;
+}
+/* Translate right to cover the right half */
+.floralRight {
+  transform: translateX(100%);
+}
+.floralImg {
+  width: 110% !important;
+  height: 110% !important;
+  object-fit: contain;
+  opacity: 0.7;
+}
+
+/* ── Zen character ───────────────────────────────────────────── */
+.pillZen {
+  position: relative;
+  z-index: 2;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.2));
+  transition: opacity 0.3s ease;
+}
+.pillZenHidden { opacity: 0; }
+
+/* ── Right half ──────────────────────────────────────────────── */
+.pillRight {
+  flex: 0 0 50%;
+  background: #FFFBE3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  padding: 0.5rem 0.75rem;
+  box-sizing: border-box;
+  border-radius: 0 999px 999px 0;
+  transform-origin: bottom left;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 1;
+  box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+  overflow: hidden;
+}
+.pillRightOpen1 {
+  transform: rotate(18deg) translateX(36px) translateY(-8px);
+}
+/* Bottoms swing inward — pivot from top-left */
+.pillRightSlight {
+  transform-origin: top left;
+  transform: rotate(14deg);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.pillRightOpen2 {
+  transform: rotate(22deg) translateX(44px) translateY(-12px);
+}
+
+/* Mood text — hidden until pill-closed */
+.pillMood {
+  margin: 0;
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.1rem, 4.5vw, 1.5rem);
+  color: #6B6B9A;
+  line-height: 1;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.pillMoodVisible { opacity: 1; }
+
+/* Date row — hidden until pill-closed */
+.pillDateRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.5s ease 0.15s;
+}
+.pillDateVisible { opacity: 1; }
+
+.pillCalIcon { opacity: 0.5; object-fit: contain; }
+.pillDate {
+  font-family: 'Afacad', sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  color: #939393;
+  white-space: nowrap;
+}
+
+/* ── Yellow glow — top and bottom of reveal card only ────────── */
+.breakGlow {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 3;
+  background:
+    radial-gradient(ellipse 30px 20px at 50% 0%,   rgba(255,220,50,0.85) 0%, transparent 100%),
+    radial-gradient(ellipse 30px 20px at 50% 100%, rgba(255,220,50,0.85) 0%, transparent 100%);
+  animation: glowFadeWithSuck 0.85s ease-in-out forwards;
+}
+@keyframes glowFadeWithSuck {
+  0%   { opacity: 0; }
+  25%  { opacity: 1; }
+  75%  { opacity: 0.5; }
+  100% { opacity: 0; }
+}
+
+/* ── Tiny card falling from pill split — calendar + date only ── */
+.tinyCard {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  /* starts at pill center seam */
+  transform: translateX(-50%) translateY(-50%);
+  width: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  z-index: 8;
+  background: rgba(123, 111, 212, 0.85);
+  border-radius: 3px;
+  padding: 4px 3px;
+  box-sizing: border-box;
+  animation: tinyFall 1s cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+@keyframes tinyFall {
+  0%   { transform: translateX(-50%) translateY(-50%);   opacity: 1; }
+  30%  { transform: translateX(-50%) translateY(20px);   opacity: 1; }
+  100% { transform: translateX(-50%) translateY(140px);  opacity: 0; }
+}
+.tinyCalIcon { opacity: 0.9; object-fit: contain; filter: brightness(0) invert(1); }
+.tinyDate {
+  font-family: 'Afacad', sans-serif;
+  font-size: 4px;
+  color: #ffffff;
+  white-space: nowrap;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* ── Rising avatar ───────────────────────────────────────────── */
+.risingAvatar {
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translateX(-50%) translateY(0px);
+  opacity: 0;
+  z-index: 20;
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    transform 0.65s cubic-bezier(0.34, 1.56, 0.64, 1),
+    left 0.6s ease,
+    bottom 0.6s ease;
+}
+.avatarRisen {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-110px);
+}
+/* Avatar moves to absolute center of screen when pill fades */
+.avatarCenter {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  bottom: auto;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition:
+    opacity 0.4s ease,
+    top 0.5s ease,
+    transform 0.5s ease;
+}
+.avatarImg {
+  object-fit: contain;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+  animation: avatarFloat 2s ease-in-out infinite;
+}
+@keyframes avatarFloat {
+  0%   { transform: translateY(0px);  }
+  50%  { transform: translateY(-6px); }
+  100% { transform: translateY(0px);  }
+}
+
+/* ── Reveal card ─────────────────────────────────────────────── */
+.revealCard {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transform-origin: center center;
+  width: min(300px, 80vw);
+  height: 240px;
+  border-radius: 20px;
+  background: linear-gradient(129.33deg, #7B6FD4 0%, #9B8FE8 50%, #C4B5F4 100%);
+  box-shadow: 0px 0px 40px 12px rgba(255, 234, 0, 0.45);
+  z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  padding: 1rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  transition:
+    opacity 0.35s ease,
+    transform 0.55s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.revealVisible {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+/* card-suck: collapses to 35% and holds — pill still open */
+.revealSucking {
+  animation: suckCollapse 0.6s cubic-bezier(0.4, 0, 0.9, 0.6) forwards;
+}
+
+@keyframes suckCollapse {
+  0%   { transform: translate(-50%, -50%) scale(1);    opacity: 1; border-radius: 20px; }
+  100% { transform: translate(-50%, -50%) scale(0.35); opacity: 1; border-radius: 8px;  }
+}
+
+/* pill-closing: card holds at 35% while pill halves close around it */
+.revealHolding {
+  transform: translate(-50%, -50%) scale(0.35);
+  opacity: 1;
+  border-radius: 8px;
+}
+
+.revealCalWrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.revealCalImg {
+  opacity: 0.5;
+  filter: brightness(0) invert(1);
+  object-fit: contain;
+}
+.revealDate {
+  font-family: 'Afacad', sans-serif;
+  font-size: 11px;
+  color: #ffffff;
+  mix-blend-mode: overlay;
+}
+.revealMood {
+  position: absolute;
+  top: 24px;
+  right: 16px;
+  margin: 0;
+  font-family: 'Afacad', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: #ffffff;
+  mix-blend-mode: overlay;
+}
+.revealPlayer {
+  position: absolute !important;
+  top: -2px;
+  right: 0;
+  opacity: 0.5;
+  border-radius: 40px;
+  object-fit: cover;
+}
+.revealSongLabel {
+  margin: 0;
+  font-family: 'Afacad', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #ffffff;
+  margin-top: auto;
+}
+.revealSongName {
+  margin: 0;
+  font-family: 'Afacad', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #ffffff;
+  letter-spacing: 0.02em;
+}
+
+/* ── Date rising from bottom ─────────────────────────────────── */
+.dateRising {
+  position: absolute;
+  left: 50%;
+  bottom: 10%;
+  transform: translateX(-50%) translateY(0px);
+  opacity: 0;
+  z-index: 6;
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.dateRisingVisible {
+  opacity: 1;
+  /* moves up toward pill position */
+  transform: translateX(-50%) translateY(-60px);
+}
+.dateRisingText {
+  font-family: 'Afacad', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #939393;
+  white-space: nowrap;
+}

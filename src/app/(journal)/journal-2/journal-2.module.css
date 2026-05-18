@@ -8,8 +8,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: clamp(1rem, 4vw, 2rem);
-  gap: clamp(1.5rem, 4vw, 2.5rem);
+  padding: 0;
+  gap: 0;
   position: relative;
   background: radial-gradient(219.15% 97.49% at 68.18% 98.35%, #fddaf6 0%, #fee8ed 30.77%, #fff9e2 74.45%, #fddaee 100%);
 }
@@ -217,11 +217,6 @@
 
 /* Small phones (320px) */
 @media (max-width: 360px) {
-  .pageContainer {
-    padding: 1rem;
-    gap: 1.25rem;
-  }
-  
   .activityGrid {
     gap: 0.75rem;
   }

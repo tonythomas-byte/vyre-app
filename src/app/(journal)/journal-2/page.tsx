@@ -1,4 +1,4 @@
-'use client'
+                  'use client'
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
@@ -34,6 +34,7 @@ export default function Journal2Page() {
         return [...prev, activityId]
       }
     })
+    router.push('/journal-3')
   }
 
   const handleOthersClick = () => {
