@@ -113,7 +113,7 @@
     height: clamp(180px, 45vw, 240px);
   }
   
-  .v {
+  .v:not(.vAnimate) {
     transform: scale(1.6);
   }
 }
@@ -129,7 +129,7 @@
     height: 180px;
   }
   
-  .v {
+  .v:not(.vAnimate) {
     transform: scale(1.5);
   }
 }

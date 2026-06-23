@@ -24,8 +24,8 @@ export default function Journal4Page() {
           <Image
             src="/assets/icons/journal/floral under avatar.svg"
             alt=""
-            width={140}
-            height={140}
+            width={280}
+            height={280}
             className={styles.floralImage}
           />
         </div>

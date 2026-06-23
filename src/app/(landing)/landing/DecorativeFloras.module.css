@@ -38,9 +38,9 @@
 /* Left Middle */
 .leftMiddleImage {
   position: absolute;
-  top: 13.5rem;
-  left: clamp(-0.5rem, 0vw, 1rem);
-  width: clamp(12rem, 50vw, 18rem);
+  top: 10.5rem;
+  left: clamp(-10rem, -14vw, -7rem);
+  width: clamp(23rem, 70vw, 32rem);
   height: auto;
   opacity: 1;
   object-fit: contain;
@@ -50,9 +50,9 @@
 /* Right Middle */
 .rightMiddleImage {
   position: absolute;
-  top: 20.375rem;
-  right: clamp(-0.5rem, 0vw, 1rem);
-  width: clamp(12rem, 50vw, 18rem);
+  top: 16rem;
+  right: calc(-0.4 * clamp(24rem, 100vw, 36rem));
+  width: clamp(24rem, 100vw, 36rem);
   height: auto;
   opacity: 1;
   object-fit: contain;
@@ -86,12 +86,8 @@
     opacity: 0.9; /* Slightly reduced opacity for balance */
   }
   
-  .leftMiddle {
+  .leftMiddleImage {
     left: clamp(-5rem, -25vw, -3rem); /* Less extension on small screens */
-  }
-  
-  .rightMiddle {
-    right: clamp(-4rem, -18vw, -2rem); /* Adjusted extension */
   }
 }
 
@@ -130,6 +126,60 @@
 }
 
 /* ===== ACCESSIBILITY & PERFORMANCE ===== */
+
+/* Floral rotation animations — CW 45° then CCW back */
+@keyframes floraRotateCW {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(45deg); }
+}
+
+@keyframes floraRotateCCW {
+  from { transform: rotate(45deg); }
+  to   { transform: rotate(0deg); }
+}
+
+/* Bottom middle has its own translateX — override with combined transform */
+@keyframes floraRotateCWBottom {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to   { transform: translateX(-50%) rotate(45deg); }
+}
+
+@keyframes floraRotateCCWBottom {
+  from { transform: translateX(-50%) rotate(45deg); }
+  to   { transform: translateX(-50%) rotate(0deg); }
+}
+
+/* Top floral also has translateX(-50%) — same fix */
+@keyframes floraRotateCWTop {
+  from { transform: translateX(-50%) rotate(0deg); }
+  to   { transform: translateX(-50%) rotate(45deg); }
+}
+
+@keyframes floraRotateCCWTop {
+  from { transform: translateX(-50%) rotate(45deg); }
+  to   { transform: translateX(-50%) rotate(0deg); }
+}
+
+.floraRotateCW {
+  animation: floraRotateCW 0.8s ease-in-out forwards;
+}
+.floraRotateCCW {
+  animation: floraRotateCCW 0.8s ease-in-out forwards;
+}
+
+/* Override for elements that use translateX */
+.bottomMiddleImage.floraRotateCW {
+  animation: floraRotateCWBottom 0.8s ease-in-out forwards;
+}
+.bottomMiddleImage.floraRotateCCW {
+  animation: floraRotateCCWBottom 0.8s ease-in-out forwards;
+}
+.topUnderAvatarImage.floraRotateCW {
+  animation: floraRotateCWTop 0.8s ease-in-out forwards;
+}
+.topUnderAvatarImage.floraRotateCCW {
+  animation: floraRotateCCWTop 0.8s ease-in-out forwards;
+}
 
 /* Reduce motion for users who prefer it */
 @media (prefers-reduced-motion: reduce) {

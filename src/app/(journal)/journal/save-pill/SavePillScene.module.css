@@ -1,0 +1,490 @@
+/* ── Page ──────────────────────────────────────────────────────────────────── */
+.page {
+  min-height: 100dvh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    219.15% 97.49% at 68.18% 98.35%,
+    #fddaf6 0%,
+    #fee8ed 30.77%,
+    #fff9e2 74.45%,
+    #fddaee 100%
+  );
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── Act 1 wrapper ─────────────────────────────────────────────────────────── */
+.act1 {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Pill halves ───────────────────────────────────────────────────────────── */
+/* Dimensions and positioning are driven by inline CSS variables set in TSX   */
+.pillLeft,
+.pillRight {
+  position: absolute;
+  z-index: 5;
+  /* width / height / top / transform set via style prop in TSX */
+}
+
+.pillLeft {
+  background: linear-gradient(135deg, #4A3F9F 0%, #6B5FBF 100%);
+  overflow: hidden;
+}
+
+.pillRight {
+  background: #FFFBE3;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+}
+
+/* Floral mandala SVG — fills the pill half with padding */
+.floralWrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.floralImg {
+  width: 110%;
+  height: 110%;
+  object-fit: contain;
+  opacity: 0.6;
+  display: block;
+}
+
+/* ── Act 5 ─────────────────────────────────────────────────────────────────── */
+.act5 {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+}
+
+/* Centre warm column */
+.act5Centre {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(82vw, 340px);
+  background: linear-gradient(180deg, #FFF5F9 0%, #FFF6D4 100%);
+  z-index: 1;
+}
+
+/* Side blue panels */
+.act5Side {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: calc((100% - min(82vw, 340px)) / 2);
+  background: linear-gradient(92.09deg, rgba(217, 248, 255, 0.31) 3.53%, rgba(86, 218, 255, 0.31) 95.92%);
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+.act5SideLeft  { left: 0; }
+.act5SideRight { right: 0; }
+.act5SideHide  { opacity: 0; }
+
+/* VYRE heading — slightly smaller */
+.act5Heading {
+  position: absolute;
+  top: clamp(4rem, 12vw, 6rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  pointer-events: none;
+  width: min(60vw, 240px);
+}
+
+/* Side blue panels — wider, extend further inward */
+.act5Side {
+  position: absolute;
+  top: 0; bottom: 0;
+  width: calc((100% - min(60vw, 240px)) / 2);
+  background: linear-gradient(92.09deg, rgba(217, 248, 255, 0.31) 3.53%, rgba(86, 218, 255, 0.31) 95.92%);
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.act5HeadingImg {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: brightness(0) saturate(100%) invert(58%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(96%) contrast(86%);
+}
+
+/* Avatar — responsive from reference 108px on 390px viewport = 27.7vw
+   positioned at 39dvh vertically (332/844 ≈ 39%) */
+.act5Avatar {
+  position: absolute;
+  top:    50%;
+  left:   50%;
+  width:  clamp(80px, 27.7vw, 108px);
+  height: clamp(80px, 27.7vw, 108px);
+  object-fit: contain;
+  z-index: 20;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+}
+
+/* ── Act 4 wrapper ─────────────────────────────────────────────────────────── */
+.act4 {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Avatar floating above seam in Act 4 */
+.act4Avatar {
+  position: absolute;
+  top:  calc(50% - 80px - 100px);
+  left: 50%;
+  width:  clamp(60px, 22vw, 89px);
+  height: clamp(60px, 22vw, 89px);
+  object-fit: contain;
+  z-index: 20;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.15));
+}
+
+/* ── Act 3 wrapper ─────────────────────────────────────────────────────────── */
+.act3 {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Falling translucent card */
+.fallingCard {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100px;
+  height: 150px;
+  border-radius: 20px;
+  background: linear-gradient(129.33deg, rgba(123, 111, 212, 0.5) 0%, rgba(196, 181, 244, 0.5) 100%);
+  box-shadow:
+    0 -3px 0 2px rgba(255, 220, 30, 0.4),
+    0 -6px 10px 3px rgba(255, 220, 30, 0.2);
+  padding: 0.5rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Mood text in right half */
+.act3Mood {
+  margin: 0;
+  font-family: 'Afacad', sans-serif;
+  font-weight: 800;
+  font-size: clamp(1.4rem, 6vw, 2rem);
+  color: #6B6B9A;
+  line-height: 1.1;
+  position: absolute;
+  top: 36px;
+  left: 10px;
+  right: 10px;
+}
+
+/* Calendar + date row — outside pill, animated from page bg into right half */
+.act3DateRow {
+  z-index: 8;
+  pointer-events: none;
+}
+
+/* Calendar block — icon above, date text overlaid */
+.act3CalBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.act3CalIcon {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  opacity: 0.7;
+  filter: brightness(0) invert(0.4);
+  flex-shrink: 0;
+}
+
+.act3DateText {
+  font-family: 'Afacad', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+  color: #6B6B9A;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+
+.act2 {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Simplified card content for Act 2 */
+.playerImgSmall {
+  position: absolute !important;
+  top: 4px;
+  right: 4px;
+  opacity: 0.4;
+  object-fit: contain;
+}
+
+.placeholderBlock {
+  width: 60%;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 6px;
+  margin-top: auto;
+  margin-bottom: 6px;
+}
+
+.placeholderBlockShort {
+  width: 40%;
+  margin-bottom: 0;
+}
+
+/* Zen character centered over floral in Act 2 left pill half */
+.zenInPill {
+  width: 45%;
+  height: 45%;
+  object-fit: contain;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Act 2 shrinking card — same visuals as revealCard but sits beneath pill halves */
+.revealCardAct2 {
+  position: absolute;
+  border-radius: 24px;
+  background: linear-gradient(129.33deg, #7B6FD4 0%, #9B8FE8 50%, #C4B5F4 100%);
+  /* Glow only on top edge — negative Y offset pushes shadow upward only */
+  box-shadow:
+    0 -3px 0 2px rgba(255, 220, 30, 0.5),
+    0 -6px 10px 3px rgba(255, 220, 30, 0.25),
+    0 -10px 22px 4px rgba(255, 220, 30, 0.1);
+  padding: 0.75rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 2;
+}
+
+/* Seam glow — thin yellow beam visible at top/bottom where card peeks between halves */
+.seamGlow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 4px;
+  height: 180px;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 220, 30, 0.6) 20%,
+    rgba(255, 220, 30, 0.6) 80%,
+    transparent 100%
+  );
+  z-index: 15;
+  pointer-events: none;
+  border-radius: 2px;
+}
+
+
+.revealCard {
+  position: relative;
+  border-radius: 24px;
+  background: linear-gradient(129.33deg, #7B6FD4 0%, #9B8FE8 50%, #C4B5F4 100%);
+  box-shadow:
+    0 0 0 2px rgba(255, 220, 30, 0.5),
+    0 0 10px 3px rgba(255, 220, 30, 0.25),
+    0 0 22px 6px rgba(255, 220, 30, 0.1);
+  padding-bottom: 10px;
+  padding-right: 6px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* PillCard-matching inner elements */
+.revealCalIcon {
+  position: absolute;
+  top: 50px;
+  left: 22px;
+  width: 116px;
+  height: 120px;
+}
+
+.revealCalImg {
+  position: absolute;
+  width: 71px;
+  height: 75px;
+  opacity: 0.5;
+  filter: brightness(0) invert(1);
+  object-fit: fill;
+}
+
+.revealDate {
+  position: absolute;
+  top: 7.5px;
+  left: -12px;
+  width: 116px;
+  font-family: 'Afacad', sans-serif;
+  font-size: 9px;
+  line-height: 1;
+  color: #ffffff;
+  mix-blend-mode: overlay;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.revealMood {
+  position: absolute;
+  top: 32px;
+  left: 155px;
+  margin: 0;
+  font-family: 'Afacad', sans-serif;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1;
+  color: #ffffff;
+  mix-blend-mode: overlay;
+  white-space: nowrap;
+}
+
+.revealPlayer {
+  position: absolute !important;
+  top: -2px;
+  left: 145px;
+  width: 174px !important;
+  height: 224px !important;
+  opacity: 0.52;
+  border-radius: 53px;
+  object-fit: cover;
+}
+
+.revealSongLabel {
+  margin: 0;
+  font-family: 'Afacad', sans-serif;
+  font-weight: 700;
+  color: #ffffff;
+  margin-left: 33px;
+  margin-top: 179px;
+  white-space: nowrap;
+}
+
+.revealSongName {
+  margin: 0;
+  font-family: 'Afacad', sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  color: #ffffff;
+  margin-left: 32px;
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+
+/* ── Card contents ─────────────────────────────────────────────────────────── */
+.cardHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.calBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.calImg {
+  opacity: 0.55;
+  filter: brightness(0) invert(1);
+  object-fit: contain;
+}
+
+.dateText {
+  font-family: 'Afacad', sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+  white-space: nowrap;
+}
+
+.moodText {
+  font-family: 'Afacad', sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 7vw, 2.2rem);
+  color: #ffffff;
+  mix-blend-mode: overlay;
+  margin: 0;
+  text-align: right;
+  line-height: 1;
+}
+
+.playerImg {
+  position: absolute !important;
+  top: 0;
+  right: 0;
+  opacity: 0.45;
+  border-radius: 0 24px 0 0;
+  object-fit: cover;
+}
+
+.songSection {
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.songLabel {
+  margin: 0 0 4px;
+  font-family: 'Afacad', sans-serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.songName {
+  margin: 0;
+  font-family: 'Afacad', sans-serif;
+  font-weight: 400;
+  font-size: clamp(1rem, 4.5vw, 1.25rem);
+  color: #ffffff;
+  letter-spacing: 0.01em;
+}
